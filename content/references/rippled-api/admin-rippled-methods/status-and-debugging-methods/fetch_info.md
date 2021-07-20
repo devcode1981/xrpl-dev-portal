@@ -1,3 +1,10 @@
+---
+html: fetch_info.html
+parent: status-and-debugging-methods.html
+blurb: Get information about the server's sync with the network.
+labels:
+  - Core Server
+---
 # fetch_info
 [[Source]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/FetchInfo.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 91,
     "command": "fetch_info",
@@ -22,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "fetch_info",
     "params": [
@@ -35,7 +42,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: fetch_info [clear]
 rippled fetch_info
 ```
@@ -56,7 +63,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "info" : {
@@ -94,9 +101,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "info" : {
@@ -153,7 +161,8 @@ The fields describing a fetch in progress are subject to change without notice. 
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

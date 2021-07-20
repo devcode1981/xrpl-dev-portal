@@ -1,3 +1,11 @@
+---
+html: consensus_info.html
+parent: status-and-debugging-methods.html
+blurb: Get information about the state of consensus as it happens.
+labels:
+  - Blockchain
+  - Core Server
+---
 # consensus_info
 [[Source]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
 
@@ -12,7 +20,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 99,
     "command": "consensus_info"
@@ -21,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "consensus_info",
     "params": [
@@ -32,7 +40,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: consensus_info
 rippled consensus_info
 ```
@@ -49,7 +57,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "info" : {
@@ -124,9 +132,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "info" : {
@@ -225,7 +234,8 @@ The results of the `consensus_info` command can vary dramatically if you run it 
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

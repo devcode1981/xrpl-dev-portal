@@ -1,3 +1,10 @@
+---
+html: server-doesnt-sync.html
+parent: troubleshoot-the-rippled-server.html
+blurb: Troubleshoot problems that make a rippled server unable to sync with the rest of the XRP Ledger.
+labels:
+  - Core Server
+---
 # rippled Server Doesn't Sync
 
 This page explains possible reasons [a `rippled` server](the-rippled-server.html) may start successfully, but get stuck in a ["connected" state](rippled-server-states.html) without ever fully connecting to the network. (If the server crashes during or shortly after startup, see [Server Won't Start](server-wont-start.html) instead.)
@@ -32,10 +39,10 @@ If the problem persists, check the other possibilities listed on this page. If n
 The most common cause of syncing issues is not meeting the [system requirements](system-requirements.html). The three most common shortfalls are:
 
 - **Slow disks.** You need a consistently fast solid state disk (SSD). Cloud providers like AWS usually don't guarantee disk performance, which may be impacted by other users of shared hardware.
-- **Insufficient RAM.** The memory requirements vary depending on several factors including ones that are hard to predict like network load and how people use the XRP Ledger, so it's good to have more than the minimum system requirements just in case.
+- **Insufficient RAM.** The memory requirements vary depending on several factors including ones that are hard to predict like network load and how people use the XRP Ledger, so it's good to have more than the minimum system requirements.
 - **Poor network connection.** Network requirements vary the most based on how people use the XRP Ledger, but a slow or unstable connection can make it impossible to keep up with new transactions and data added to the XRP Ledger.
 
-If you are having trouble remaining synced, double-check that your server meets the system requirements. Depending on how you use your server, you may need to meet the higher "Recommended" requirements instead of just the "Minimum" requirements. If you meet the "Recommended" requirements and still cannot sync, try the other possibilities on this page.
+If you are having trouble remaining synced, double-check that your server meets the system requirements. Depending on how you use your server, you may need to meet the higher "Recommended" requirements. If you meet the "Recommended" requirements and still cannot sync, try the other possibilities on this page.
 
 
 ## Couldn't Load Validator List
@@ -106,6 +113,7 @@ As a test, you can temporarily change the paths to your server's databases as lo
         - [server_info method][]
         - [validator_list_sites method][]
 
+<!-- SPELLING_IGNORE: aws -->
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}
 {% include '_snippets/tx-type-links.md' %}

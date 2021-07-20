@@ -1,3 +1,10 @@
+---
+html: list-xrp-as-an-exchange.html
+parent: xrp-ledger-businesses.html
+blurb: デジタルアセット取引所でXRPを上場するために必要な手順の概要を説明します。
+labels:
+  - XRP
+---
 # 取引所としてのXRPの上場
 
 本書では、取引所がXRPを上場するために必要なステップを説明します。
@@ -54,7 +61,7 @@ XRPをサポートするために、Alpha Exchangeでは以下を行う必要が
 
 ### アカウント
 
-XRPは、XRP Ledgerの _アカウント_ （ _ウォレット_ や _アドレス_ とも呼ばれる）で保持されます。XRP Ledgerのアカウントは、例えばBitcoinのような、アカウントに経費がほとんどまたは一切かからない他のブロックチェーンの台帳とは異なります。XRP Ledgerでは、アカウントは[決して削除できず](accounts.html#アカウントの永続性)、各アカウントは個別の、他の人に送信することのできない、[XRPの準備金](reserves.html)を保持する必要があります。このような理由から、Rippleでは利用機関に対し、必要のない過剰なアカウントを作成しないように勧めています。
+XRPは、XRP Ledgerの _アカウント_ （ _ウォレット_ や _アドレス_ とも呼ばれる）で保持されます。XRP Ledgerのアカウントは、例えばBitcoinのような、アカウントに経費がほとんどまたは一切かからない他のブロックチェーンの台帳とは異なります。XRP Ledgerでは、[アカウントの削除](accounts.html#アカウントの削除)は可能が、各アカウントは個別の、他の人に送信することのできない、[XRPの準備金](reserves.html)を保持する必要があります。このような理由から、Rippleでは利用機関に対し、必要のない過剰なアカウントを作成しないように勧めています。
 
 <!-- STYLE_OVERRIDE: hot wallet, warm wallet, cold wallet, wallet -->
 

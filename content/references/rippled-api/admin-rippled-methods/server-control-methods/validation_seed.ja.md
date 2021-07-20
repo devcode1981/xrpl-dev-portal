@@ -1,5 +1,13 @@
+---
+html: validation_seed.html
+parent: server-control-methods.html
+blurb: 無効。rippledが検証の署名に使用するシークレット値を一時的に設定します。
+status: removed
+labels:
+  - コアサーバー
+---
 # validation_seed
-[[ソース]<br>](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ValidationSeed.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ValidationSeed.cpp "Source")
 
 `validation_seed`コマンドは、rippledが検証の署名に使用するシークレット値を一時的に設定します。サーバーを再起動すると、この値は構成ファイルに基づいてリセットされます。[rippled 0.29.1 以降では無効](https://github.com/ripple/rippled/releases/tag/0.29.1-rc1 "BADGE_RED")
 
@@ -12,7 +20,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": "set_seed_1",
    "command": "validation_seed",
@@ -22,7 +30,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: validation_seed [secret]
 rippled validation_seed 'BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE'
 ```
@@ -43,8 +51,9 @@ rippled validation_seed 'BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE'
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
   "result" : {
      "status" : "success",
@@ -57,9 +66,10 @@ rippled validation_seed 'BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE'
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "status" : "success",

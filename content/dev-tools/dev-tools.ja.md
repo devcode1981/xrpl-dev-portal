@@ -1,28 +1,34 @@
 # 開発者用ツール
-<!--{# TODO: Ensure that the list below follows the order of the left nav. #}-->
 
 Rippleには、XRP LedgerのAPIリクエストと動作をテスト、探索、検証するための一連の開発者用ツールがそろっています。
 
-* **[XRP Ledger Lookup Tool](xrp-ledger-rpc-tool.html)**
+* **[XRP Ledger RPCツール](xrp-ledger-rpc-tool.html)**
 
-      このJSON-RPCベースのデバッグツールを使用して、XRP Ledgerのアカウント、取引、台帳についての生データを表示します。
+  このツールを使用して、XRP Ledgerのアカウント、取引、台帳についての生データを出力します。
 
-* **[XRP Ledger Test Net Faucet](xrp-test-net-faucet.html)**
+* **[WebSocket APIツール](websocket-api-tool.html)**
 
-      WebSocketおよびJSON-RPC Test Netエンドポイントを使用して、XRP Ledger上で構築したソフトウェアを実際の資金を使用せずにテストします。テストの目的でTest Netのクレデンシャルと資金を生成します。Test Netの台帳と残高は定期的にリセットされます。
-<!--{# TODO: For information about how to connect your `rippled` test server to the Test Net, see [XXXXX](x). #}-->
+  このツールを使用して、`rippled` APIにサンプル要求を送信し、応答を取得します。設定は何も必要ありません。
 
-* **[rippled API WebSocket Tool](websocket-api-tool.html)**
+* **[xrp-ledger.tomlチェッカー](xrp-ledger-toml-checker.html)**
 
-      動作中のrippled APIを今すぐ見る必要がありますか? このツールを使用して、あらかじめ用意されたサンプル要求を送信し、応答を取得します。設定は何も必要ありません。
-<!--{# TODO: which methods are surfaced here -- is this all of them? #}-->
+      このツールを使用して、[xrp-ledger.tomlファイル](xrp-ledger-toml.html)が適切にセットアップされていることを確認します。
 
-* **[Data API v2 Tool](data-api-v2-tool.html)**
+* **[ドメイン検証チェッカー](validator-domain-verifier.html)**
 
-      動作中のData API v2を今すぐ見る必要がありますか? このツールを使用して、あらかじめ用意されたサンプル要求を送信し、応答を取得します。設定は何も必要ありません。
+      Use this tool to check that your validator's domain can be verified.
 
-* **[rippled.txt Validator](ripple-txt-validator.html)**
+* **[XRP Faucet](xrp-testnet-faucet.html)**
 
-      このツールを使用して、「ripple.txt」が構文的に正しいことと、正しくデプロイされたことを確認します。
+  XRP Ledger TestnetまたはDevnetのクレデンシャルとテスト用XRPを取得し、これらの並列ネットワークのサーバーに接続して、実際の資金を使用せずにXRP Ledgerでソフトウェアの構築をテストします。
+
+* **[トランザクション送信ツール](tx-sender.html)**
+
+  選択したアドレスにXRP LedgerトランザクションをTestnet経由で送信し、コードによってさまざまなXRP Ledgerトランザクションが処理される方法をテストします。
+
+* **[XRP Ledger Explorer](https://livenet.xrpl.org/)**
+
+  レジャーの新バージョンの検証をリアルタイムで表示し、XRP Ledgerネットワーク内のサーバーの地理的位置をグラフ化し、レジャーの状態を調べます。[Testnet Explorer](https://testnet.xrpl.org/)も使用できます。
+
 
 ここにないツールについて何かアイデアをお持ちですか? [お問い合わせ>](mailto:docs@ripple.com)

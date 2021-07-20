@@ -1,5 +1,12 @@
+---
+html: submit_multisigned.html
+parent: transaction-methods.html
+blurb: マルチ署名済みトランザクションを適用し、このトランザクションをネットワークに送信します。
+labels:
+  - トランザクション送信
+---
 # submit_multisigned
-[[ソース]<br>](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
 
 `submit_multisigned`コマンドは[マルチ署名済み](multi-signing.html)トランザクションを適用し、このトランザクションをネットワークに送信して、今後のレジャーに追加します。（[`submit`コマンドを送信専用モードで](submit.html#送信専用モード)使用して、マルチ署名済みトランザクションをバイナリー形式で送信することもできます。)
 
@@ -12,9 +19,9 @@
 
 *WebSocket*
 
-```
+```json
 {
-   "id": "submit_multisigned_example"
+   "id": "submit_multisigned_example",
    "command": "submit_multisigned",
    "tx_json": {
        "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -48,7 +55,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "submit_multisigned",
    "params": [
@@ -90,7 +97,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: submit_multisigned <tx_json>
 rippled submit_multisigned '{
    "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -141,7 +148,7 @@ rippled submit_multisigned '{
 
 *WebSocket*
 
-```
+```json
 {
  "id": "submit_multisigned_example",
  "status": "success",
@@ -187,8 +194,9 @@ rippled submit_multisigned '{
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result": {
        "engine_result": "tesSUCCESS",

@@ -1,3 +1,10 @@
+---
+html: connect.html
+parent: peer-management-methods.html
+blurb: Force the rippled server to connect to a specific peer.
+labels:
+  - Core Server
+---
 # connect
 [[Source]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/Connect.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "command": "connect",
     "ip": "192.170.145.88",
@@ -22,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "connect",
     "params": [
@@ -37,7 +44,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: connect ip [port]
 rippled connect 192.170.145.88 51235
 ```
@@ -49,7 +56,7 @@ The request includes the following parameters:
 | `Field` | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
 | `ip`    | String | IP address of the server to connect to                    |
-| `port`  | Number | _(Optional)_ Port number to use when connecting. Defaults to 6561. |
+| `port`  | Number | _(Optional)_ Port number to use when connecting. The default is **2459**. [Updated in: rippled 1.6.0][] |
 
 ### Response Format
 
@@ -59,7 +66,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "message" : "connecting",
@@ -70,9 +77,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "message" : "connecting",
@@ -91,9 +99,10 @@ The response follows the [standard format][], with a successful result containin
 
 ### Possible Errors
 
-* Any of the [universal error types][].
-* `invalidParams` - One or more fields are specified incorrectly, or one or more required fields are missing.
-* Cannot connect in standalone mode - Network-related commands are disabled in stand-alone mode.
+- Any of the [universal error types][].
+- `invalidParams` - One or more fields are specified incorrectly, or one or more required fields are missing.
+- Cannot connect in standalone mode - Network-related commands are disabled in stand-alone mode.
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

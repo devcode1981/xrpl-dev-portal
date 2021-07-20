@@ -1,3 +1,10 @@
+---
+html: submit_multisigned.html
+parent: transaction-methods.html
+blurb: Send a multi-signed transaction to the network.
+labels:
+  - Transaction Sending
+---
 # submit_multisigned
 [[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "submit_multisigned_example",
     "command": "submit_multisigned",
@@ -48,7 +55,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "submit_multisigned",
     "params": [
@@ -90,7 +97,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: submit_multisigned <tx_json>
 rippled submit_multisigned '{
     "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -141,7 +148,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "submit_multisigned_example",
   "status": "success",
@@ -187,8 +194,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "engine_result": "tesSUCCESS",

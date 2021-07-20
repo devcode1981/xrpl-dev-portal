@@ -1,3 +1,10 @@
+---
+html: use-a-peer-reservation.html
+parent: configure-peering.html
+blurb: Set up a more reliable connection to a specific peer using a peer reservation.
+labels:
+  - Core Server
+---
 # Use a Peer Reservation
 
 A [peer reservation][] is a setting that makes a `rippled` server always accept connections from a peer matching the reservation. This page describes how to use peer reservations to keep a consistent peer-to-peer connection between two servers, with the cooperation of the administrators of both servers.
@@ -150,7 +157,7 @@ As a server administrator, you can manage the reservations your server has for o
 - Remove one of your reservations using the [peer_reservations_del method][].
 - Check which peers are currently connected and how much bandwidth they have used, using the [peers method][].
 
-**Tip:** Although there is no API method to immediately disconnect from an unwanted peer, you can use a software firewall such as `firewalld` to block an unwanted peer from connecting to your server. For examples, see the community-contributed [rbh script](https://github.com/gnanderson/rbh).
+**Tip:** Although there is no API method to immediately disconnect from an unwanted peer, you can use a software firewall such as `firewalld` to block an unwanted peer from connecting to your server. For examples, see the community-contributed [rbh script](https://github.com/gnanderson/rbh). <!-- SPELLING_IGNORE: rbh -->
 
 
 ## See Also

@@ -1,5 +1,12 @@
+---
+html: account_currencies.html
+parent: account-methods.html
+blurb: アカウントが送金または受領できる通貨のリストを返します。
+labels:
+  - トークン
+---
 # account_currencies
-[[ソース]<br>](https://github.com/ripple/rippled/blob/df966a9ac6dd986585ecccb206aff24452e41a30/src/ripple/rpc/handlers/AccountCurrencies.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/df966a9ac6dd986585ecccb206aff24452e41a30/src/ripple/rpc/handlers/AccountCurrencies.cpp "Source")
 
 `account_currencies`コマンドは、アカウントのトラストラインに基づいてそのアカウントが送金または受領できる通貨のリストを返します。（このリストは完全に確認されたリストではありませんが、ユーザーインターフェイスへの入力に使用できます。）
 
@@ -46,7 +53,7 @@
 | `account`      | 文字列                     | アカウントの一意のIDであり、通常はアカウントの[アドレス][]です。 |
 | `strict`       | ブール値                    | _（省略可）_ trueの場合は、アカウントパラメーターにアドレスまたは公開鍵だけを受け入れます。デフォルトではfalseです。 |
 | `ledger_hash`  | 文字列                     | _（省略可）_ 使用するレジャーバージョンの20バイトの16進文字列。（[レジャーの指定][]を参照してください） |
-| `ledger_index` | 文字列または符号なし整数 | _（省略可）_ 使用するレジャーのシーケンス番号、またはレジャーを自動的に選択するためのショートカット文字列。（[レジャーの指定][]を参照してください） |
+| `ledger_index` | 文字列または符号なし整数 | _（省略可）_ 使用する[レジャーインデックス][]、またはレジャーを自動的に選択するためのショートカット文字列。（[レジャーの指定][]を参照してください） |
 
 以下のフィールドは廃止予定であるため、指定しないでください。`account_index`.
 

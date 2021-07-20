@@ -1,3 +1,10 @@
+---
+html: freezes.html
+parent: issued-currencies.html
+blurb: 凍結では、コンプライアンス目的で発行済み通貨の取引を停止できます。
+labels:
+  - トークン
+---
 # 発行済み通貨の凍結
 
 XRPは発行済み通貨ではありません。XRPはXRP Ledgerのネイティブ資産であり、XRP Ledgerでのトランザクションの実行に必要となります。XRPは取引相手を必要としません。つまり、XRPを保有しているということは負債ではなく実際の通貨であるXRPを保有していることになります。このため、_**<u>いかなる組織または個人もXRPを凍結できません</u>**_。
@@ -96,9 +103,9 @@ No Freeze設定は、アドレスのマスターキーのシークレットキ�
 
 `Fee`、`Sequence`、`LastLedgerSequence`パラメーターは[通常の方法で](transaction-basics.html#トランザクションへの署名とトランザクションの送信)設定します。
 
-[WebSocket API](get-started-with-the-rippled-api.html#websocket-api)を使用してIndividual Freezeを有効にするTrustSetトランザクションを送信する例:
+[WebSocket API](get-started-using-http-websocket-apis.html#websocket-api)を使用してIndividual Freezeを有効にするTrustSetトランザクションを送信する例:
 
-```
+```json
 {
  "id": 12,
  "command": "submit",
@@ -150,9 +157,9 @@ No Freeze設定は、アドレスのマスターキーのシークレットキ�
 
 アドレスに対してGlobal Freezeを有効にするには、`SetFlag`フィールドに[asfGlobalFreezeフラグ値](accountset.html#accountsetのフラグ)を指定した`AccountSet`トランザクションを送信します。Global Freezeを無効にするには、`ClearFlag`フィールドにasfGlobalFreezeフラグ値を指定します。
 
-[WebSocket API](get-started-with-the-rippled-api.html#websocket-api)を使用してGlobal Freezeを有効にするAccountSetトランザクションを送信する例:
+[WebSocket API](get-started-using-http-websocket-apis.html#websocket-api)を使用してGlobal Freezeを有効にするAccountSetトランザクションを送信する例:
 
-```
+```json
 {
  "id": 12,
  "command": "submit",
@@ -198,11 +205,11 @@ No Freeze設定は、アドレスのマスターキーのシークレットキ�
 
 アドレスに対してNo Freezeを有効にするには、`SetFlag`フィールドに[asfNoFreezeフラグ値](accountset.html#accountsetのフラグ)を指定した`AccountSet`トランザクションを送信します。このトランザクションをマスターキーで署名する必要があります。有効にしたNo Freezeを無効にすることはできません。
 
-[WebSocket API](get-started-with-the-rippled-api.html#websocket-api)を使用してNo Freezeを有効にするAccountSetトランザクションを送信する例:
+[WebSocket API](get-started-using-http-websocket-apis.html#websocket-api)を使用してNo Freezeを有効にするAccountSetトランザクションを送信する例:
 
 WebSocket要求:
 
-```
+```json
 {
  "id": 12,
  "command": "submit",
@@ -261,7 +268,7 @@ WebSocket要求:
 
 Individual Freezeを確認するためのWebSocket要求の例:
 
-```
+```json
 {
  "id": 15,
  "command": "account_lines",
@@ -273,7 +280,7 @@ Individual Freezeを確認するためのWebSocket要求の例:
 
 WebSocket応答の例:
 
-```
+```json
 {
  "id": 15,
  "status": "success",
@@ -341,7 +348,7 @@ WebSocket応答の例:
 
 WebSocket要求の例:
 
-```
+```json
 {
  "id": 1,
  "command": "account_info",
@@ -352,7 +359,7 @@ WebSocket要求の例:
 
 WebSocket応答:
 
-```
+```json
 {
  "id": 4,
  "status": "success",
@@ -385,10 +392,10 @@ WebSocket応答:
 上記の例では`Flags`の値は12582912です。この場合、次のJavaScriptコードのように、lsfGlobalFreezeフラグとlsfDefaultRippleフラグが有効になっています。
 
 ```js
-var lsfGlobalFreeze = 0x00400000; 
-var lsfNoFreeze = 0x00200000; 
+var lsfGlobalFreeze = 0x00400000;
+var lsfNoFreeze = 0x00200000;
 
-var currentFlags = 12582912; 
+var currentFlags = 12582912;
 
 console.log(currentFlags & lsfGlobalFreeze); //4194304
 //therefore, Global Freeze is enabled

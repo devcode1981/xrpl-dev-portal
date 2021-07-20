@@ -1,3 +1,11 @@
+---
+html: wallet_propose.html
+parent: key-generation-methods.html
+blurb: Generate keys for a new account.
+labels:
+  - Security
+  - Accounts
+---
 # wallet_propose
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/WalletPropose.cpp "Source")
 
@@ -15,7 +23,7 @@ An example of the request format:
 
 *WebSocket (with key type)*
 
-```
+```json
 {
     "command": "wallet_propose",
     "seed": "snoPBrXtMeMyMHUVTgbuqAfg1SUTb",
@@ -25,7 +33,7 @@ An example of the request format:
 
 *WebSocket (no key type)*
 
-```
+```json
 {
     "command": "wallet_propose",
     "passphrase": "masterpassphrase"
@@ -34,7 +42,7 @@ An example of the request format:
 
 *JSON-RPC (with key type)*
 
-```
+```json
 {
     "method": "wallet_propose",
     "params": [
@@ -48,7 +56,7 @@ An example of the request format:
 
 *JSON-RPC (no key type)*
 
-```
+```json
 {
     "method": "wallet_propose",
     "params": [
@@ -61,7 +69,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: wallet_propose [passphrase]
 rippled wallet_propose masterpassphrase
 ```
@@ -108,7 +116,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "status": "success",
@@ -127,7 +135,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
     "result": {
         "account_id": "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
@@ -144,9 +152,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "account_id" : "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",

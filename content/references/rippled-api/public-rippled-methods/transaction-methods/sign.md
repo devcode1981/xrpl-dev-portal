@@ -1,3 +1,10 @@
+---
+html: sign.html # watch for clashes w/ this filename
+parent: transaction-methods.html
+blurb: Cryptographically sign a transaction.
+labels:
+  - Transaction Sending
+---
 # sign
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/SignHandler.cpp "Source")
 
@@ -15,7 +22,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "command": "sign",
@@ -37,7 +44,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "sign",
     "params": [
@@ -62,7 +69,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: sign secret tx_json [offline]
 rippled sign s████████████████████████████ '{"TransactionType": "Payment", "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn", "Destination": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX", "Amount": { "currency": "USD", "value": "1", "issuer" : "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn" }, "Sequence": 360, "Fee": "10000"}' offline
 ```
@@ -85,9 +92,9 @@ The request includes the following parameters:
 | `passphrase`   | String  | _(Optional)_ The secret seed of the account supplying the transaction, used to sign it, as a string passphrase. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed`, or `seed_hex`. |
 | `key_type`     | String  | _(Optional)_ The [signing algorithm](cryptographic-keys.html#signing-algorithms) of the cryptographic key pair provided. Valid types are `secp256k1` or `ed25519`. Defaults to `secp256k1`. Cannot be used with `secret`. |
 | `offline`      | Boolean | _(Optional)_ If `true`, when constructing the transaction, do not try to [automatically fill](#auto-fillable-fields) any transaction details. The default is `false`. |
-| `build_path`   | Boolean | _(Optional)_ If provided for a Payment-type transaction, automatically fill in the `Paths` field before signing. **Caution:** The server looks for the presence or absence of this field, not its value. This behavior may change. |
-| `fee_mult_max` | Integer | _(Optional)_ Limits how high the [automatically-provided `Fee` field](transaction-common-fields.html#auto-fillable-fields) can be. Signing fails with the error `rpcHIGH_FEE` if the current [load multiplier on the transaction cost](transaction-cost.html#local-load-cost) is greater than (`fee_mult_max` ÷ `fee_div_max`). Ignored if you specify the `Fee` field of the transaction ([transaction cost](transaction-cost.html)). The default is `10`. |
-| `fee_div_max`  | Integer | _(Optional)_ Signing fails with the error `rpcHIGH_FEE` if the current [load multiplier on the transaction cost](transaction-cost.html#local-load-cost) is greater than (`fee_mult_max` ÷ `fee_div_max`). Ignored if you specify the `Fee` field of the transaction ([transaction cost](transaction-cost.html)). The default is `1`. [New in: rippled 0.30.1][] |
+| `build_path`   | Boolean | _(Optional)_ If this field is provided, the server [auto-fills](transaction-common-fields.html#auto-fillable-fields) the `Paths` field of a [Payment transaction][] before signing. You must omit this field if the transaction is a [direct XRP payment](direct-xrp-payments.html) or if it is not a Payment-type transaction. **Caution:** The server looks for the presence or absence of this field, not its value. This behavior may change. ([Issue #3272](https://github.com/ripple/rippled/issues/3272)) |
+| `fee_mult_max` | Integer | _(Optional)_ Signing fails with the error `rpcHIGH_FEE` if the [auto-filled `Fee` value](transaction-common-fields.html#auto-fillable-fields) would be greater than the [reference transaction cost](transaction-cost.html#special-transaction-costs) × `fee_mult_max` ÷ `fee_div_max`. This field has no effect if you explicitly specify the `Fee` field of the transaction. The default is `10`. |
+| `fee_div_max`  | Integer | _(Optional)_ Signing fails with the error `rpcHIGH_FEE` if the [auto-filled `Fee` value](transaction-common-fields.html#auto-fillable-fields) would be greater than the [reference transaction cost](transaction-cost.html#special-transaction-costs) × `fee_mult_max` ÷ `fee_div_max`. This field has no effect if you explicitly specify the `Fee` field of the transaction. The default is `1`. [New in: rippled 0.30.1][] |
 
 ### Auto-Fillable Fields
 
@@ -109,7 +116,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "status": "success",
@@ -138,8 +145,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "status": "success",
@@ -166,9 +174,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success",
@@ -217,5 +226,7 @@ The response follows the [standard format][], with a successful result containin
 * `noPath` - The transaction did not include paths, and the server was unable to find a path by which this payment can occur.
 
 
-{% include '_snippets/rippled_versions.md' %}
+<!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}
+{% include '_snippets/tx-type-links.md' %}
+{% include '_snippets/rippled_versions.md' %}

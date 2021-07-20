@@ -1,5 +1,12 @@
+---
+html: stop.html
+parent: server-control-methods.html
+blurb: サーバーのグレースフルシャットダウンを行います。
+labels:
+  - コアサーバー
+---
 # stop
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Stop.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Stop.cpp "Source")
 
 サーバーのグレースフルシャットダウンを行います。
 
@@ -12,7 +19,7 @@ _`stop`要求は、権限のないユーザーは実行できない*[管理メ�
 
 *WebSocket*
 
-```
+```json
 {
    "id": 0,
    "command": "stop"
@@ -21,7 +28,7 @@ _`stop`要求は、権限のないユーザーは実行できない*[管理メ�
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "stop",
    "params": [
@@ -48,7 +55,7 @@ rippled stop
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "message" : "ripple server stopping",
@@ -59,9 +66,10 @@ rippled stop
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "message" : "ripple server stopping",

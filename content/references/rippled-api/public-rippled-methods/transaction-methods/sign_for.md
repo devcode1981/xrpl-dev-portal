@@ -1,3 +1,10 @@
+---
+html: sign_for.html
+parent: transaction-methods.html
+blurb: Contribute to a multi-signature.
+labels:
+  - Transaction Sending
+---
 # sign_for
 [[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SignFor.cpp "Source")
 
@@ -15,7 +22,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "sign_for_example",
     "command": "sign_for",
@@ -40,8 +47,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
-POST http://localhost:5005/
+```json
 {
     "method": "sign_for",
     "params": [{
@@ -67,7 +73,7 @@ POST http://localhost:5005/
 
 *Commandline*
 
-```
+```sh
 #Syntax: rippled sign_for <signer_address> <signer_secret> [offline]
 rippled sign_for rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW s████████████████████████████ '{
     "TransactionType": "TrustSet",
@@ -111,7 +117,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "sign_for_example",
   "status": "success",
@@ -147,8 +153,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result" : {
       "status" : "success",
@@ -182,9 +189,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success",

@@ -1,3 +1,11 @@
+---
+html: account_info.html
+parent: account-methods.html
+blurb: Get basic data about an account.
+labels:
+  - Accounts
+  - XRP
+---
 # account_info
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/AccountInfo.cpp "Source")
 
@@ -11,11 +19,11 @@ An example of an account_info request:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "command": "account_info",
-  "account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+  "account": "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
   "strict": true,
   "ledger_index": "current",
   "queue": true
@@ -24,7 +32,7 @@ An example of an account_info request:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "account_info",
     "params": [
@@ -40,9 +48,9 @@ An example of an account_info request:
 
 *Commandline*
 
-```
+```sh
 #Syntax: account_info account [ledger_index|ledger_hash] [strict]
-rippled account_info r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 true
+rippled account_info rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn validated strict
 ```
 
 <!-- MULTICODE_BLOCK_END -->
@@ -54,11 +62,11 @@ The request contains the following parameters:
 | `Field`        | Type                       | Description                    |
 |:---------------|:---------------------------|:-------------------------------|
 | `account`      | String                     | A unique identifier for the account, most commonly the account's [Address][]. |
-| `strict`       | Boolean                    | (Optional, defaults to False) If set to True, then the `account` field only accepts a public key or XRP Ledger address. |
 | `ledger_hash`  | String                     | _(Optional)_ A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
 | `ledger_index` | String or Unsigned Integer | _(Optional)_ The [ledger index][] of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
-| `queue`        | Boolean                    | _(Optional)_ If `true`, and the [FeeEscalation amendment][] is enabled, also returns stats about queued transactions associated with this account. Can only be used when querying for the data from the current open ledger. [New in: rippled 0.33.0][] |
+| `queue`        | Boolean                    | _(Optional)_ If `true`, and the [FeeEscalation amendment][] is enabled, also returns stats about queued transactions associated with this account. Can only be used when querying for the data from the current open ledger. [New in: rippled 0.33.0][] Not available from servers in [Reporting Mode][]. |
 | `signer_lists` | Boolean                    | _(Optional)_ If `true`, and the [MultiSign amendment][] is enabled, also returns any [SignerList objects](signerlist.html) associated with this account. [New in: rippled 0.31.0][] |
+| `strict`       | Boolean                    | _(Optional)_ If `true`, then the `account` field only accepts a public key or XRP Ledger address. Otherwise, `account` can be a secret or passphrase (not recommended). The default is `false`. |
 
 The following fields are deprecated and should not be provided: `ident`, `ledger`.
 
@@ -70,7 +78,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 5,
     "status": "success",
@@ -120,7 +128,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
     "result": {
         "account_data": {
@@ -163,6 +171,31 @@ An example of a successful response:
         "status": "success",
         "validated": false
     }
+}
+```
+
+*Commandline*
+
+```json
+{
+   "result" : {
+      "account_data" : {
+         "Account" : "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
+         "Balance" : "9986",
+         "Flags" : 1114112,
+         "LedgerEntryType" : "AccountRoot",
+         "OwnerCount" : 0,
+         "PreviousTxnID" : "0705FE3F52057924C288296EF0EBF668E0C1A3646FBA8FAF9B73DCC0A797B4B2",
+         "PreviousTxnLgrSeq" : 51948740,
+         "RegularKey" : "rhLkGGNZdjSpnHJw4XAFw1Jy7PD8TqxoET",
+         "Sequence" : 192220,
+         "index" : "92FA6A9FC8EA6018D5D16532D7795C91BFB0831355BDFDA177E86C8BF997985F"
+      },
+      "ledger_hash" : "8169428EDF7F046F817CE44F5F1DF23AD9FAEFFA2CBA7645C3254D66AA79B46E",
+      "ledger_index" : 56843712,
+      "status" : "success",
+      "validated" : true
+   }
 }
 ```
 

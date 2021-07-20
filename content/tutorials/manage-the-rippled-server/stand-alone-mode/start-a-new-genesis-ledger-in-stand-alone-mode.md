@@ -1,3 +1,10 @@
+---
+html: start-a-new-genesis-ledger-in-stand-alone-mode.html
+parent: use-stand-alone-mode.html
+blurb: Start from a fresh genesis ledger in stand-alone mode.
+labels:
+  - Core Server
+---
 # Start a New Genesis Ledger in Stand-Alone Mode
 
 In stand-alone mode, you can have `rippled` create a new genesis ledger. This provides a known state, with none of the ledger history from the production XRP Ledger. (This is very useful for unit tests, among other things.)
@@ -14,7 +21,7 @@ In a genesis ledger, the [genesis address](accounts.html#special-addresses) hold
 
 **Address:** `rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh`
 
-**Secret:** `snoPBrXtMeMyMHUVTgbuqAfg1SUTb` ("masterpassphrase")
+**Secret:** `snoPBrXtMeMyMHUVTgbuqAfg1SUTb` ("`masterpassphrase`")
 
 ## Settings in New Genesis Ledgers
 
@@ -35,7 +42,7 @@ By default, a new genesis ledger has no [amendments](amendments.html) enabled. I
     - [server_info method][]
     - [`rippled` Commandline Usage](commandline-usage.html)
 - **Use Cases:**
-    - [Contribute Code to `rippled`](contribute-code-to-rippled.html)
+    - [Contribute Code to the XRP Ledger](contribute-code-to-rippled.html)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

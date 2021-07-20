@@ -1,3 +1,11 @@
+---
+html: online-deletion.html
+parent: ledger-history.html
+blurb: Online deletion purges outdated transaction and state history.
+labels:
+  - Data Retention
+  - Core Server
+---
 # Online Deletion
 [[Source]<br/>](https://github.com/ripple/rippled/blob/master/src/ripple/app/misc/SHAMapStoreImp.cpp "Source")
 
@@ -22,7 +30,7 @@ Inside the ledger store, ledger data is "de-duplicated". In other words, data th
 The online deletion settings configure how many ledger versions the `rippled` server should keep available in the ledger store at a time. However, the specified number is a guideline, not a hard rule:
 
 - The server never deletes data more recent than the configured number of ledger versions, but it may have less than that amount available if it has not been running for long enough or if it lost sync with the network at any time. (The server attempts to backfill at least some history; see [fetching history](ledger-history.html#fetching-history) for details.)
-- The server may store up to just over twice the configured number of ledger versions if online deletion is set to run automatically. (Each time it runs, it reduces the number of stored ledger versions to approximately the configured number.)
+- The server may store up to slightly over twice the configured number of ledger versions if online deletion is set to run automatically. (Each time it runs, it reduces the number of stored ledger versions to approximately the configured number.)
 
     If online deletion is delayed because the server is busy, ledger versions can continue to accumulate. When functioning normally, online deletion begins when the server has twice the configured number of ledger versions, but it may not complete until after several more ledger versions have accumulated.
 
@@ -30,7 +38,7 @@ The online deletion settings configure how many ledger versions the `rippled` se
 
     The amount of data the server stores depends on how often you call [can_delete][can_delete method] and how big an interval of time your `online_delete` setting represents:
 
-    - If you call `can_delete` _more often_ than your `online_delete` interval, the server stores at most a number of ledger versions approximately equal to **twice the `online_delete` value**. (After deletion, this is reduced to approximately the `online_delete` value.)
+    - If you call `can_delete` _more often_ than your `online_delete` interval, the server stores at most a number of ledger versions approximately equal to **twice the `online_delete` value**. (After deletion, this is reduced to approximately the `online_delete` value.) <!-- STYLE_OVERRIDE: a number of -->
 
         For example, if you call `can_delete` with a value of `now` once per day and an `online_delete` value of 50,000, the server typically stores up to 100,000 ledger versions before running deletion. After running deletion, the server keeps at least 50,000 ledger versions (about two days' worth). With this configuration, approximately every other `can_delete` call results in no change because the server does not have enough ledger versions to delete.
 
@@ -70,7 +78,7 @@ The following settings relate to online deletion:
 
     The following diagram shows the relationship between `online_delete` and `ledger_history` settings:
 
-    ![Ledgers older than `online_delete` are automatically deleted. Ledgers newer than `ledger_history` are backfilled. Ledgers in between are kept if available but not backfilled](img/online_delete-vs-ledger_history.png)
+    {{ include_svg("img/online_delete-vs-ledger_history.svg", "Ledgers older than `online_delete` are automatically deleted. Ledgers newer than `ledger_history` are backfilled. Ledgers in between are kept if available but not backfilled") }}
 
 - **`advisory_delete`** - If enabled, online deletion is not scheduled automatically. Instead, an administrator must manually trigger online deletion. Use the value `0` for disabled or `1` for enabled.
 
@@ -82,9 +90,9 @@ The following settings relate to online deletion:
 
     The `fetch_depth` setting cannot be higher than `online_delete` if both are specified. If `fetch_depth` is set higher, the server treats it as equal to `online_delete` instead.
 
-    The following diagram shows how fetch_depth works:
+    The following diagram shows how `fetch_depth` works:
 
-    ![Ledger versions older than fetch_depth are not served to peers](img/fetch_depth.png)
+    {{ include_svg("img/fetch_depth.svg", "Ledger versions older than fetch_depth are not served to peers") }}
 
 For estimates of how much disk space is required to store different amounts of history, see [Capacity Planning](capacity-planning.html#disk-space).
 
@@ -105,7 +113,7 @@ Online deletion works by creating two databases: at any given time, there is an 
 
 When it comes time for online deletion, the server first walks through the oldest ledger version to keep, and copies all objects in that ledger version from the read-only "old" database into the "current" database. This guarantees that the "current" database now contains all objects used in the chosen ledger version and all newer versions. Then, the server deletes the "old" database, and changes the existing "current" database to become "old" and read-only. The server starts a new "current" database to contain any newer changes after this point.
 
-![Diagram showing how online deletion uses two databases](img/online-deletion-process.png)
+{{ include_svg('img/online-deletion-process.svg', "Diagram showing how online deletion uses two databases") }}
 
 ## See Also
 

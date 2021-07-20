@@ -1,5 +1,12 @@
+---
+html: connect.html
+parent: peer-management-methods.html
+blurb: 特定のピアrippledサーバーに強制的に接続します。
+labels:
+  - コアサーバー
+---
 # connect
-[[ソース]<br>](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/Connect.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/Connect.cpp "Source")
 
 `connect`コマンドは、`rippled`サーバーを特定のピア`rippled`サーバーに強制的に接続します。
 
@@ -12,7 +19,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "command": "connect",
    "ip": "192.170.145.88",
@@ -22,7 +29,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "connect",
    "params": [
@@ -37,7 +44,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: connect ip [port]
 rippled connect 192.170.145.88 51235
 ```
@@ -49,7 +56,7 @@ rippled connect 192.170.145.88 51235
 | `Field` | 型   | 説明                                               |
 |:--------|:-------|:----------------------------------------------------------|
 | `ip`    | 文字列 | 接続するサーバーのIPアドレス。                    |
-| `port`  | 数値 | _（省略可）_ 接続時に使用するポート番号。デフォルトでは6561です。 |
+| `port`  | 数値 | _（省略可）_ 接続時に使用するポート番号。デフォルトでは**2459**です。 [新規: rippled 1.6.0][] |
 
 ### 応答フォーマット
 
@@ -59,7 +66,7 @@ rippled connect 192.170.145.88 51235
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "message" : "connecting",
@@ -70,9 +77,10 @@ rippled connect 192.170.145.88 51235
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "message" : "connecting",

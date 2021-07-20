@@ -1,3 +1,10 @@
+---
+html: can_delete.html
+parent: logging-and-data-management-methods.html
+blurb: Allow online deletion of ledgers up to a specific ledger.
+labels:
+  - Data Retention
+---
 # can_delete
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/CanDelete.cpp "Source")
 
@@ -13,7 +20,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "command": "can_delete",
@@ -23,7 +30,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "can_delete",
     "params": [
@@ -36,8 +43,8 @@ An example of the request format:
 
 *Commandline*
 
-```
-#Syntax can_delete [<ledger_index>|<ledger_hash>|now|always|never]
+```sh
+#Syntax: can_delete [<ledger_index>|<ledger_hash>|now|always|never]
 rippled can_delete 11320417
 ```
 
@@ -65,7 +72,8 @@ Use this command with no parameter to query the existing `can_delete` setting.
 - `invalidParams` - One or more fields are specified incorrectly, or one or more required fields are missing.
 - `lgrNotFound` - The ledger specified by the `can_delete` field of the request does not exist, or it does exist but the server does not have it.
 - `notEnabled` - If either online deletion or advisory deletion are not enabled in the server's configuration.
-- `notReady` - The server is not ready to run online deletion at the moment. This usually means the server has just started up and has not yet acquired a validated ledger.
+- `notReady` - The server is not ready to run online deletion at the moment. This usually means the server has recently started up and has not yet acquired a validated ledger.
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 ## See Also
 

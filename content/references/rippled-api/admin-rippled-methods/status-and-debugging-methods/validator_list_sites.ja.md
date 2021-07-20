@@ -1,5 +1,13 @@
+---
+html: validator_list_sites.html
+parent: status-and-debugging-methods.html
+blurb: バリデータリストを処理するサイトのステータス情報を返します。
+labels:
+  - ブロックチェーン
+  - コアサーバー
+---
 # validator_list_sites
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/ValidatorListSites.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/ValidatorListSites.cpp "Source")
 
 `validator_list_sites`コマンドは、バリデータリストを処理するサイトのステータス情報を返します。[新規: rippled 0.80.1][]
 
@@ -12,7 +20,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": 1,
    "command": "validator_list_sites"
@@ -21,7 +29,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "validator_list_sites",
    "params": [
@@ -32,7 +40,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: validator_list_sites
 rippled validator_list_sites
 ```
@@ -49,7 +57,7 @@ rippled validator_list_sites
 
 *WebSocket*
 
-```
+```json
 {
    "id":5,
    "status":"success",
@@ -70,8 +78,9 @@ rippled validator_list_sites
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result": {
        "status": "success",
@@ -89,9 +98,10 @@ rippled validator_list_sites
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result": {
        "status": "success",

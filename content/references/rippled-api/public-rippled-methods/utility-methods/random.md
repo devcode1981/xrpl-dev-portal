@@ -1,3 +1,10 @@
+---
+html: random.html
+parent: utility-methods.html
+blurb: Generate a random number.
+labels:
+  - Core Server
+---
 # random
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Random.cpp "Source")
 
@@ -10,7 +17,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 1,
     "command": "random"
@@ -19,7 +26,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "random",
     "params": [
@@ -30,7 +37,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: random
 rippled random
 ```
@@ -47,7 +54,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 1,
     "result": {
@@ -60,13 +67,25 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "random": "4E57146AA47BC6E88FDFE8BAA235B900126C916B6CC521550996F590487B837A",
         "status": "success"
     }
+}
+```
+
+*Commandline*
+
+```json
+{
+   "result" : {
+      "random" : "DB7C23C7F224CD410912E68A997BE0FD0FA7175A4C74B829BE5A80ED0DBAA0C5",
+      "status" : "success"
+   }
 }
 ```
 

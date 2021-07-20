@@ -1,5 +1,13 @@
+---
+html: ledger_data.html
+parent: ledger-methods.html
+blurb: 指定されたレジャーの内容を取得します。
+label:
+  - ブロックチェーン
+  - データ保持
+---
 # ledger_data
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerData.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerData.cpp "Source")
 
 `ledger_data`メソッドは指定されたレジャーの内容を取得します。1つのレジャーバージョンの内容全体を取得するため、複数のコールを繰り返し実行できます。
 
@@ -10,7 +18,7 @@
 
 *WebSocket*
 
-```
+```json
 {
   "id":2,
   "ledger_hash":"842B57C1CC0613299A686D3E9F310EC0422C84D3911E5056389AA7E5808A93C8",
@@ -22,7 +30,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method":"ledger_data",
    "params":[
@@ -60,7 +68,7 @@
 
 *WebSocket (binary:true)*
 
-```
+```json
 {
    "id":2,
    "result":{
@@ -97,7 +105,7 @@
 
 *WebSocket (binary:false)*
 
-```
+```json
 {
    "id":2,
    "result":{
@@ -196,8 +204,9 @@
 
 *JSON-RPC (binary:true)*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "ledger_hash":"842B57C1CC0613299A686D3E9F310EC0422C84D3911E5056389AA7E5808A93C8",

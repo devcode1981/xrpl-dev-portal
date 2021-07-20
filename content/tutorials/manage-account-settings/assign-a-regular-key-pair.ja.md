@@ -1,3 +1,11 @@
+---
+html: assign-a-regular-key-pair.html
+parent: manage-account-settings.html
+blurb: アカウントからトランザクションに署名できるように第2キーペアを承認します。このキーペアは後から変更や削除が可能です。
+labels:
+  - セキュリティ
+  - アカウント
+---
 # レギュラーキーペアの割り当て
 
 XRP Ledgerでは、アカウントはその後のトランザクションには _レギュラーキーペア_ と呼ばれるセカンダリキーペアで署名することができます。レギュラーキーペアの秘密鍵が漏えいした場合は、秘密鍵を削除または交換できます。その際に、アカウントの秘密鍵以外の設定を変更したり、他のアカウントとの関係を再設定する必要はありません。レギュラーキーペアを積極的にローテーションすることも可能です。（アカウントのアドレスに固有に関連付けられているアカウントのマスターキーペアでは、このような操作は実行できません。）
@@ -24,7 +32,7 @@ XRP Ledgerでは、アカウントはその後のトランザクションには 
 
 *WebSocket*
 
-```
+```json
 {
  "command":"wallet_propose"
 }
@@ -32,7 +40,7 @@ XRP Ledgerでは、アカウントはその後のトランザクションには 
 
 *JSON-RPC*
 
-```
+```json
 {
  "method":"wallet_propose"
 }
@@ -40,7 +48,7 @@ XRP Ledgerでは、アカウントはその後のトランザクションには 
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: wallet_propose
 rippled wallet_propose
 ```
@@ -56,7 +64,7 @@ rippled wallet_propose
 
 *WebSocket*
 
-```
+```json
 {
  "result":{
    "account_id":"rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
@@ -74,7 +82,7 @@ rippled wallet_propose
 
 *JSON-RPC*
 
-```
+```json
 {
    "result":{
        "account_id":"rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
@@ -91,7 +99,7 @@ rippled wallet_propose
 
 *コマンドライン*
 
-```
+```json
 {
   "result" :{
      "account_id" :"rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
@@ -142,7 +150,7 @@ SetRegularKeyトランザクションでレギュラーキーペアを初めて�
 
 *WebSocket*
 
-```
+```json
 {
  "command":"sign",
  "tx_json":{
@@ -156,7 +164,7 @@ SetRegularKeyトランザクションでレギュラーキーペアを初めて�
 
 *JSON-RPC*
 
-```
+```json
 {
   "method":"sign",
   "params":[
@@ -174,7 +182,7 @@ SetRegularKeyトランザクションでレギュラーキーペアを初めて�
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: sign secret tx_json
 rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", "Account":"rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93", "RegularKey":"rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7"}'
 ```
@@ -190,7 +198,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *WebSocket*
 
-```
+```json
 {
  "result":{
    "tx_blob":"1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
@@ -213,7 +221,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *JSON-RPC*
 
-```
+```json
 {
    "result":{
        "status":"success",
@@ -235,7 +243,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *コマンドライン*
 
-```
+```json
 {
   "result" :{
      "status" :"success",
@@ -274,7 +282,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *WebSocket*
 
-```
+```json
 {
    "command":"submit",
    "tx_blob":"1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540"
@@ -283,7 +291,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *JSON-RPC*
 
-```
+```json
 {
   "method":"submit",
   "params":[
@@ -296,7 +304,7 @@ rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType":"SetRegularKey", 
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: submit tx_blob
 rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540
 ```
@@ -312,7 +320,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *WebSocket*
 
-```
+```json
 {
  "result":{
    "engine_result":"tesSUCCESS",
@@ -338,7 +346,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *JSON-RPC*
 
-```
+```json
 {
    "result":{
       "engine_result":"tesSUCCESS",
@@ -363,7 +371,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *コマンドライン*
 
-```
+```json
 {
   "result" :{
      "engine_result" :"tesSUCCESS",
@@ -421,7 +429,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *WebSocket*
 
-```
+```json
 {
  "command":"sign",
  "tx_json":{
@@ -434,7 +442,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *JSON-RPC*
 
-```
+```json
 {
   "method":"sign",
   "params":[
@@ -451,7 +459,7 @@ rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: sign secret tx_json
 rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Account":"rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93"}'
 ```
@@ -467,7 +475,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *WebSocket*
 
-```
+```json
 {
  "result":{
    "tx_blob":"1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
@@ -489,7 +497,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *JSON-RPC*
 
-```
+```json
 {
    "result":{
        "status":"success",
@@ -510,7 +518,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *コマンドライン*
 
-```
+```json
 {
   "result" :{
      "status" :"success",
@@ -548,7 +556,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *WebSocket*
 
-```
+```json
 {
    "command":"submit",
    "tx_blob":"1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E"
@@ -557,7 +565,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *JSON-RPC*
 
-```
+```json
 {
   "method":"submit",
   "params":[
@@ -570,7 +578,7 @@ rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType":"AccountSet", "Ac
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: submit tx_blob
 rippled submit 1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E
 ```
@@ -586,7 +594,7 @@ rippled submit 1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D
 
 *WebSocket*
 
-```
+```json
 {
  "result":{
    "engine_result":"tesSUCCESS",
@@ -611,7 +619,7 @@ rippled submit 1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D
 
 *JSON-RPC*
 
-```
+```json
 {
    "result":{
        "engine_result":"tesSUCCESS",
@@ -635,7 +643,7 @@ rippled submit 1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D
 
 *コマンドライン*
 
-```
+```json
 {
   "result" :{
      "engine_result" :"tesSUCCESS",

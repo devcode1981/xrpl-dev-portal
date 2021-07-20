@@ -1,10 +1,17 @@
+---
+html: rippled-server-modes.html
+parent: the-rippled-server.html
+blurb: ストックサーバー、バリデータサーバー、スタンドアロンモードで運用されるrippledサーバーなど、rippledサーバーのモードについて説明します。
+labels:
+  - コアサーバー
+---
 # rippledサーバーのモード
 
 `rippled`サーバーソフトウェアは、その設定に応じて以下のようなさまざまなモードで実行できます。
 
 * ストックサーバー - レジャーのローカルコピーを保持し、ネットワークをフォローします。
-* 検証サーバー（_バリデータ_）- コンセンサスの参加者（ストックサーバーの処理もすべて行います）。
-* `rippled` スタンドアロンモードのサーバー - テスト用。他の`rippled`サーバーと通信しません。
+* 検証サーバー（ _バリデータ_ ）- コンセンサスの参加者（ストックサーバーの処理もすべて行います）。
+* `rippled`スタンドアロンモードのサーバー - テスト用。他の`rippled`サーバーと通信しません。
 
 また、[`rippled` API](rippled-api.html)にローカルでアクセスするためのクライアントアプリケーションとして、`rippled`実行可能ファイルを実行できます。（この場合同じバイナリの2つのインスタンスを並列して実行できます。1つのインスタンスをサーバーとして実行し、もう1つのインスタンスをクライアントとして一時的に実行して終了します。）
 
@@ -15,7 +22,7 @@
 
 独自の`rippled`サーバーを運用する理由は多数ありますが、その最たる理由として、独自サーバーが信頼できるものであり、自身でその負荷を管理でき、サーバーにアクセスするタイミングとアクセス方法を他のユーザーに依存せずに決めることができる点があげられます。もちろん、独自サーバーを不正使用者から保護するために適切なネットワークセキュリティ対策を講じなければなりません。
 
-使用する`rippled`を信頼する必要があります。悪意のあるサーバーに接続してしまうと、そのサーバーはさまざまな方法であなたを利用して資金を失わせることができます。次に例を示します。
+使用する`rippled`を信頼する必要があります。悪意のあるサーバーに接続してしまうと、そのサーバーはさまざまな方法であなたを利用して資金を失わせることができます。例:
 
 * 悪意のあるサーバーは、実際には行われていないあなたへの支払いが行われたと報告することがあります。
 * ペイメントパスと通貨取引オファーを選択的に表示または非表示にし、最適なディールをあなたに提示せずに不正使用者の利益になるようにします。
@@ -27,15 +34,15 @@
 
 ### 公開ハブ
 
-**Note:** この部分は日本語ではまだ利用できません。助けたいと思うなら、[提供して下さい！](https://github.com/ripple/xrpl-dev-portal#contributing)
+公開ハブは、他のサーバーへの[ピアプロトコル接続](peer-protocol.html)が多数あるストックサーバーを指します。ストックサーバーを公開ハブとして実行することで、XRP Ledgerネットワークの効率的な接続を維持できます。適切に運用されている公開ハブには、以下の特徴があります。
 
-A public hub is a stock server with lots of [peer protocol connections](peer-protocol.html) to other servers. You can help the XRP Ledger network maintain efficient connectivity by running a stock server as a public hub. Successful public hubs embody the following traits:
+- 十分な帯域幅。
 
-- Good bandwidth.
+- 多数の信頼できるピアとの接続。
 
-- Connections with a lot of reliable peers.
+- メッセージを確実に中継する能力。
 
-- Ability to relay messages reliably.
+
 
 ## バリデータを運用する理由
 
@@ -60,8 +67,34 @@ XRP Ledgerの堅牢性は、バリデータが相互に接続されたネット�
 
 **注意:** スタンドアロンモードでは[レジャーを手動で進める](advance-the-ledger-in-stand-alone-mode.html)必要があります。
 
+## レポーティングモード
+[導入: rippled 1.7.0][][]
+
+<!-- TODO: translate this section -->
+Reporting mode is specialized mode for serving API requests more efficiently. In this mode, the server gets the latest validated ledger data over [gRPC](https://xrpl.org/configure-grpc.html) from a separate `rippled` server running in P2P Mode, then loads that data into a relational database ([PostgreSQL](https://www.postgresql.org/)). The reporting mode server does not directly participate in the peer-to-peer network, though it can forward requests such as transaction submission to the P2P Mode server it uses.
+
+Multiple reporting mode servers can share access to a PostgreSQL database and [Apache Cassandra](https://cassandra.apache.org/) cluster to serve a large amount of history without each server needing a redundant copy of all the data. Reporting mode servers provide this data through the same [`rippled` APIs](rippled-api.html) with some slight changes to accommodate for the differences in how they store the underlying data.
+
+Most notably, reporting mode servers do not report pending, non-validated ledger data or transactions. This limitation is relevant to certain use cases that rely on rapid access to in-flux data, such as performing arbitrage in the [decentralized exchange](decentralized-exchange.html).
+
+
+
 ## 関連項目
 
-- [コマンドライン使用リファレンス](commandline-usage.html) - すべての`rippled`サーバーモードのコマンドラインオプションに関する詳細情報。
+- **リファレンス:**
+  - [コマンドライン使用リファレンス](commandline-usage.html) - すべての`rippled`サーバーモードのコマンドラインオプションに関する詳細情報。
+  - [ledger_acceptメソッド][] - スタンドアロンモードでレジャーを手動で進めます。
+  - [featureメソッド][] - 現在有効になっている既知の[Amendment](amendments.html)を確認します。
+- **チュートリアル:**
+  - [`rippled`の構成](configure-rippled.html)
+    - [バリデータとしての`rippled`の実行](run-rippled-as-a-validator.html)
+  - [スタンドアロンモードでのrippledの使用](use-stand-alone-mode.html):
+    - [スタンドアロンモードでの新しいジェネシスレジャーの開始](start-a-new-genesis-ledger-in-stand-alone-mode.html)
+    - [スタンドアロンモードでの保存済みレジャーの読み込み](load-a-saved-ledger-in-stand-alone-mode.html)
+    - [スタンドアロンモードでレジャーを進める](advance-the-ledger-in-stand-alone-mode.html)
 
+
+<!--{# common link defs #}-->
+{% include '_snippets/rippled-api-links.md' %}			 
+{% include '_snippets/tx-type-links.md' %}			 
 {% include '_snippets/rippled_versions.md' %}

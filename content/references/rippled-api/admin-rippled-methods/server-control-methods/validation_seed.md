@@ -1,3 +1,11 @@
+---
+html: validation_seed.html
+parent: server-control-methods.html
+blurb: (Obsolete) Temporarily set key to be used for validating.
+status: removed
+labels:
+  - Core Server
+---
 # validation_seed
 [[Source]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ValidationSeed.cpp "Source")
 
@@ -12,7 +20,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "set_seed_1",
     "command": "validation_seed",
@@ -22,7 +30,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: validation_seed [secret]
 rippled validation_seed 'BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE'
 ```
@@ -43,8 +51,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result" : {
       "status" : "success",
@@ -57,9 +66,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success",

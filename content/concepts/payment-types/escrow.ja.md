@@ -1,3 +1,11 @@
+---
+html: escrow.html
+parent: payment-types.html
+blurb: XRPはEscrowに預託され、後日特定の条件が満たされた時点で送金されます。Escrowは時間制限、暗号条件、あるいはその両方によって異なる場合があります。
+labels:
+  - Escrow
+  - スマートコントラクト
+---
 # Escrow
 
 Escrowは、XRP建ての条件付き送金決済を可能にするXRP Ledgerの機能です。 _Escrow_ と呼ばれるこの条件付き決済では、XRPはエスクローに預託され、後日特定の条件が満たされた時点で送金されます。Escrowを完了する条件には、時間ベースのロック解除や[Crypto-conditions][]などがあります。期限までに終了しなかった場合に期限切れとなるようにEscrowを設定することもできます。
@@ -61,7 +69,7 @@ Escrowは、少量の大口決済に適した大きな保証を提供してい�
 
 ## Escrowの利用可能性
 
-条件付き決済は、2017-03-31以降XRP Ledgerコンセンサスプロトコルに対する[「Escrow」Amendment](known-amendments.html#escrow)により利用可能になりました。同機能の以前のバージョンは、2016年に「Suspended Payments」（SusPay）という名称で[Ripple Test Net](https://ripple.com/build/ripple-test-net/)で利用可能になりました。
+条件付き決済は、2017-03-31以降XRP Ledgerコンセンサスプロトコルに対する[「Escrow」Amendment](known-amendments.html#escrow)により利用可能になりました。同機能の以前のバージョンは、2016年に「Suspended Payments」（SusPay）という名称で[XRP Ledger Testnet](xrp-testnet-faucet.html)で利用可能になりました。
 
 [スタンドアロンモード](rippled-server-modes.html#rippledサーバーをスタンドアロンモードで実行する理由)でのテストの際には、Amendmentのステータスに関係なく、Escrow機能をローカルで強制的に有効にできます。次のスタンザを`rippled.cfg`に追加してください。
 

@@ -1,3 +1,11 @@
+---
+html: configure-advisory-deletion.html
+parent: configure-rippled.html
+blurb: Use advisory deletion to delete older ledger history on a schedule rather than as new history becomes available.
+labels:
+  - Core Server
+  - Data Retention
+---
 # Configure Advisory Deletion
 
 The default config file sets [`rippled`](the-rippled-server.html) to automatically delete outdated [history](ledger-history.html) of XRP Ledger state and transactions as new ledger versions become available. If your server uses most of its hardware resources during peak hours, you can configure the server to delete ledgers only when prompted by a command scheduled to run during off-peak hours, so that online deletion is less likely to impact [server performance](capacity-planning.html).
@@ -44,7 +52,7 @@ To configure advisory deletion with a daily schedule, perform the following step
 
 2. Test running the [can_delete method][] to prompt the server to run online deletion.
 
-    You can use the [`rippled` commandline interface](get-started-with-the-rippled-api.html#commandline) to run this command. For example:
+    You can use the [`rippled` commandline interface](get-started-using-http-websocket-apis.html#commandline) to run this command. For example:
 
         $ rippled --conf=/etc/opt/ripple/rippled.cfg can_delete now
 
@@ -88,7 +96,7 @@ To configure advisory deletion with a daily schedule, perform the following step
 If online deletion does not seem to be running after configuring it, try the following:
 
 - Check that the user who configured the `cron` job has permissions to run the `rippled` server as a commandline client.
-- Check the syntax of your cron job and the time when it is supposed to run.
+- Check the syntax of your `cron` job and the time when it is supposed to run.
 - Check that the `rippled` executable is available at the path specified in your `cron` configuration. If necessary, specify the absolute path to the executable, such as `/opt/ripple/bin/rippled`.
 - Check your `rippled` logs for messages that begin with `SHAMapStore::WRN`. This can indicate that [online deletion is being interrupted](online-deletion.html#interrupting-online-deletion) because your server fell out of sync with the network.
 

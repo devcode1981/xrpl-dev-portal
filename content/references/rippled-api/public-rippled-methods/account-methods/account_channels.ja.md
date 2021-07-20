@@ -1,5 +1,12 @@
+---
+html: account_channels.html
+parent: account-methods.html
+blurb: アカウントのPayment Channelに関する情報を返します。
+labels:
+  - Payment Channel
+---
 # account_channels
-[[ソース]<br>](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/AccountChannels.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/AccountChannels.cpp "Source")
 
 _（[PayChan Amendment][]が有効になっている必要があります。[新規: rippled 0.33.0][]）_
 
@@ -51,7 +58,7 @@ rippled account_channels rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH rf1BiGeXwwQoi8Z2ueFY
 | `account`             | 文字列                                     | アカウントの一意のID。通常はアカウントの[アドレス][]です。要求は、このアカウントがChannelの所有者/送金元であるChannelを返します。 |
 | `destination_account` | 文字列                                     | _（省略可）_ アカウントの一意のID。通常はアカウントの[アドレス][]です。指定されている場合、フィルタリングによりこのアカウントを送金先とするPayment Channelに絞り込まれます。 |
 | `ledger_hash`         | 文字列                                     | _（省略可）_ 使用するレジャーバージョンの20バイトの16進文字列。（[レジャーの指定][]を参照してください） |
-| `ledger_index`        | 文字列または符号なし整数                 | _（省略可）_ 使用するレジャーのシーケンス番号、またはレジャーを自動的に選択するためのショートカット文字列。（[レジャーの指定][]を参照してください） |
+| `ledger_index`        | 文字列または符号なし整数                 | _（省略可）_ 使用する[レジャーインデックス][]、またはレジャーを自動的に選択するためのショートカット文字列。（[レジャーの指定][]を参照してください） |
 | `limit`               | 整数                                    | _（省略可）_ 取得するトランザクション数を制限します。サーバーはこの値に従う必要はありません。10以上400以下の範囲で値を指定する必要があります。デフォルトでは200です。 |
 | `marker`              | [マーカー][] | _（省略可）_ 以前にページネーションされた応答の値。その応答を停止した箇所からデータの取得を再開します。 |
 

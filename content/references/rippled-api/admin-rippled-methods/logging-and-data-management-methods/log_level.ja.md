@@ -1,5 +1,12 @@
+---
+html: log_level.html
+parent: logging-and-data-management-methods.html
+blurb: ログ詳細レベルを変更するか、現在のログレベルを返します。
+labels:
+  - データ保持
+---
 # log_level
-[[ソース]<br>](https://github.com/ripple/rippled/blob/155fcdbcd0b4927152892c8c8be01d9cf62bed68/src/ripple/rpc/handlers/LogLevel.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/155fcdbcd0b4927152892c8c8be01d9cf62bed68/src/ripple/rpc/handlers/LogLevel.cpp "Source")
 
 `log_level`コマンドは`rippled`サーバーのログ詳細レベルを変更するか、各ログメッセージカテゴリー（_パーティション_）の現在のログレベルを返します。
 
@@ -12,7 +19,7 @@ _`log_level`メソッドは、権限のないユーザーは実行できない[�
 
 *WebSocket*
 
-```
+```json
 {
    "id": "ll1",
    "command": "log_level",
@@ -23,7 +30,7 @@ _`log_level`メソッドは、権限のないユーザーは実行できない[�
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: log_level [[partition] severity]
 rippled log_level PathRequest debug
 ```
@@ -45,9 +52,10 @@ rippled log_level PathRequest debug
 
 *コマンドライン（ログレベルの設定）*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "status" : "success"
@@ -57,9 +65,10 @@ Connecting to 127.0.0.1:5005
 
 *コマンドライン（ログレベルの確認）*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "levels" : {

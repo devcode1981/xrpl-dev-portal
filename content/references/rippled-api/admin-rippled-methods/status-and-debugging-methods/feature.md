@@ -1,9 +1,17 @@
+---
+html: feature.html
+parent: status-and-debugging-methods.html
+blurb: Get information about protocol amendments.
+labels:
+  - Blockchain
+  - Core Server
+---
 # feature
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Feature1.cpp "Source")
 
 The `feature` command returns information about [amendments](amendments.html) this server knows about, including whether they are enabled and whether the server is voting in favor of those amendments in the [amendment process](amendments.html#amendment-process). [New in: rippled 0.31.0][]
 
-You can use the `feature` command to temporarily configure the server to vote against or in favor of an amendment. This change does not persist if you restart the server. To make lasting changes in amendment voting, use the `rippled.cfg` file. See [Configuring Amendment Voting](amendments.html#configuring-amendment-voting) for more information.
+You can use the `feature` command to configure the server to vote against or in favor of an amendment. This change persists even if you restart the server. [Updated in: rippled 1.7.0][]
 
 _The `feature` method is an [admin method](admin-rippled-methods.html) that cannot be run by unprivileged users._
 
@@ -14,7 +22,7 @@ An example of the request format:
 
 *WebSocket - list all*
 
-```
+```json
 {
   "id": "list_all_features",
   "command": "feature"
@@ -23,7 +31,7 @@ An example of the request format:
 
 *WebSocket - reject*
 
-```
+```json
 {
   "id": "reject_multi_sign",
   "command": "feature",
@@ -34,7 +42,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "feature",
     "params": [
@@ -48,7 +56,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: feature [<feature_id> [accept|reject]]
 rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373 accept
 ```
@@ -72,7 +80,7 @@ An example of a successful response:
 
 *WebSocket - list all*
 
-```
+```json
 {
   "id": "list_all_features",
   "status": "success",
@@ -116,7 +124,7 @@ An example of a successful response:
 
 *WebSocket - reject*
 
-```
+```json
 {
     "id": "reject_multi_sign",
     "status": "success",
@@ -136,8 +144,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373": {
@@ -153,9 +162,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
     "result": {
         "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373": {
@@ -184,8 +194,9 @@ The response follows the [standard format][], with a successful result containin
 
 ### Possible Errors
 
-* Any of the [universal error types][].
-* `badFeature` - The `feature` specified was invalidly formatted, or the server does not know an amendment with that name.
+- Any of the [universal error types][].
+- `badFeature` - The `feature` specified was invalidly formatted, or the server does not know an amendment with that name.
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

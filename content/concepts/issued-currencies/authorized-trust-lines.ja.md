@@ -1,3 +1,11 @@
+---
+html: authorized-trust-lines.html
+parent: issued-currencies.html
+blurb: 通貨発行者が自己の発行済み通貨を保有できる人を制限できる、Authorized Trust Lineについて説明します。
+labels:
+  - トークン
+  - セキュリティ
+---
 # Authorized Trust Lines
 
 XRP LedgerのAuthorized Trust Lines機能により、通貨イシュアーは自身の（XRP以外の）発行済み通貨を保有できるユーザーを制限できます。これにより、不明なXRP Ledgerアドレスは発行済み通貨を保有できなくなります。Authorized Trust Lines機能は発行済み通貨にのみ適用され、XRPには影響しません。
@@ -28,7 +36,7 @@ Authorized Trust Lines機能を使用するには、イシュアーがその発�
 
 要求:
 
-```
+```json
 POST http://localhost:5005/
 {
    "method": "submit",
@@ -66,7 +74,7 @@ Authorized Trust Lines機能を使用している場合、他のアカウント�
 
 要求:
 
-```
+```json
 POST http://localhost:8088/
 {
    "method": "submit",

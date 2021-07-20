@@ -1,3 +1,11 @@
+---
+html: offline-account-setup.html
+parent: manage-account-settings.html
+blurb: Set up an XRP Ledger account using an air-gapped, offline machine to store its cryptographic keys.
+labels:
+  - Accounts
+  - Security
+---
 # Offline Account Setup Tutorial
 
 A highly secure [signing configuration](set-up-secure-signing.html) involves keeping an XRP Ledger [account](accounts.html)'s [cryptographic keys](cryptographic-keys.html) securely on an offline, air-gapped machine. After setting up this configuration, you can sign a variety of transactions, transfer only the signed transactions to an online computer, and submit them to the XRP Ledger network without ever exposing your secret key to malicious actors online.
@@ -9,7 +17,7 @@ A highly secure [signing configuration](set-up-secure-signing.html) involves kee
 To use offline signing, you must meet the following prerequisites:
 
 - You must have one computer to use as an offline machine. This machine must be set up with a [supported operating system](system-requirements.html). See your operating system's support for offline setup instructions. (For example, [Red Hat Enterprise Linux DVD ISO installation instructions](https://access.redhat.com/solutions/7227).) Be sure that the software and physical media you use are not infected with malware.
-- You must have a separate computer to use as an online machine. This machine does not need to run `rippled` but it must be able to connect to the XRP Ledger network and receive accurate information about the state of the shared ledger. For example, you can use a [WebSocket connection to a public server](get-started-with-the-rippled-api.html).
+- You must have a separate computer to use as an online machine. This machine does not need to run `rippled` but it must be able to connect to the XRP Ledger network and receive accurate information about the state of the shared ledger. For example, you can use a [WebSocket connection to a public server](get-started-using-http-websocket-apis.html).
 - You must have a secure way to transfer signed transaction binary data from the offline machine to the online machine.
     - One way to do this is with a QR code generator on the offline machine, and a QR code scanner on the online machine. (In this case, your "online machine" could be a handheld device such as a smartphone.)
     - Another way is to copy files from the offline machine to an online machine using physical media. If you use this method, be sure not to use physical media that could infect your offline machine with malicious software. (For example, do not reuse the same USB drive on both online and offline machines.)
@@ -30,7 +38,7 @@ Software options for signing on the XRP Ledger include:
 - Install [ripple-lib](rippleapi-reference.html) and its dependencies offline. The Yarn package manager, for example, has [recommended instructions for offline usage](https://yarnpkg.com/blog/2016/11/24/offline-mirror/).
 - See also: [Set Up Secure Signing](set-up-secure-signing.html)
 
-You may want to set up custom software to facilitate the process of constructing transaction instructions on the offline machine. For example, your software may track what [sequence number][] to use next, or contain preset templates for certain types of transactions you expect to send.
+You may want to set up custom software to help construct transaction instructions on the offline machine. For example, your software may track what [sequence number][] to use next, or contain preset templates for certain types of transactions you expect to send.
 
 
 ### {{n.next()}}. Generate cryptographic keys
@@ -65,10 +73,12 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 Take note of the following values:
 
 - **`account_id`**. This is the address associated with the key pair, which will become your **[account](accounts.html) address** in the XRP Ledger after you fund it with XRP (later in this process). It is safe to share your `account_id` publicly.
-- **`master_seed`**. This is the secret seed value for the keypair, which you'll use to sign transactions from the account. For best security, encrypt this value before writing it to disk on the offline machine. As an encryption key, use a secure passphrase that human operators can memorize or write down somewhere physically secure, such as a [diceware passphrase](http://world.std.com/~reinhold/diceware.html) created with properly weighted dice. You may also want to use a physical security key as a second factor. The extent of the precautions to take at this stage is up to you.
+- **`master_seed`**. This is the secret seed value for the key pair, which you'll use to sign transactions from the account. For best security, encrypt this value before writing it to disk on the offline machine. As an encryption key, use a secure passphrase that human operators can memorize or write down somewhere physically secure, such as a [diceware passphrase](http://world.std.com/~reinhold/diceware.html) created with properly weighted dice. You may also want to use a physical security key as a second factor. The extent of the precautions to take at this stage is up to you.
 - **`key_type`**. This is the cryptographic algorithm used for this key pair. You need to know what type of key pair you have in order to sign valid transactions. The default is `secp256k1`.
 
 **Do not** share the `master_key`, `master_seed`, or `master_seed_hex` values anywhere. Any of these can be used to reconstruct the private key associated with this address.
+
+<!-- SPELLING_IGNORE: diceware -->
 
 
 
@@ -86,7 +96,7 @@ When the transaction from the previous step is validated by consensus, your acco
 
 Take note of the sequence number of the account, in the `Sequence` field of the result's `account_data`. You need to know the sequence number to sign transactions from the account in future steps.
 
-If the [DeletableAccounts amendment](known-amendments.html#deletableaccounts) :not_enabled: is enabled, the `Sequence` number of a newly-funded account matches the [ledger index][] when it was funded. Otherwise, a newly funded account's `Sequence` number is always 1.
+The `Sequence` number of a newly-funded account matches the [ledger index][] when it was funded. Before the [DeletableAccounts amendment](known-amendments.html#deletableaccounts), a newly funded account's `Sequence` number was always 1.
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -137,14 +147,14 @@ On the offline machine, prepare and sign transactions for configuring your accou
 - [Require destination tags](require-destination-tags.html) so that users can't send you payments without tagging the reason they sent it or the customer it's intended for.
 - [Set Up Multi-Signing](set-up-multi-signing.html) for a higher bar of account security.
 - [Enable DepositAuth](depositauth.html) so you can only receive payments you've explicitly accepted or from parties you've pre-approved.
-- [Enable RequireAuth](become-an-xrp-ledger-gateway.html#enabling-requireauth) so that users can't open [trust lines](trust-lines-and-issuing.html) to you without your permission. If you don't plan to use the XRP Ledger's decentralized exchange or issued currency features, you may want to do this as a precaution.
+- [Require Auth](become-an-xrp-ledger-gateway.html#enabling-require-auth) so that users can't open [trust lines](trust-lines-and-issuing.html) to you without your permission. If you don't plan to use the XRP Ledger's decentralized exchange or issued currency features, you may want to do this as a precaution.
 - Issued currency [Gateways](become-an-xrp-ledger-gateway.html) may have additional setup, such as:
-    - [Set a TransferRate](become-an-xrp-ledger-gateway.html#transferrate) for users transferring your issued currencies.
-    - [Disallow XRP payments](become-an-xrp-ledger-gateway.html#disallowxrp) if you plan to use this address for issued currencies only.
+    - [Set a Transfer Fee](become-an-xrp-ledger-gateway.html#transfer-fees) for users transferring your issued currencies.
+    - [Disallow XRP payments](become-an-xrp-ledger-gateway.html#disallow-xrp) if you plan to use this address for issued currencies only.
 
 At this stage, you are only signing the transactions, not submitting them. For each transaction, you must provide all fields, including fields that are normally auto-fillable such as the `Fee` ([transaction cost](transaction-cost.html)) and `Sequence` ([sequence number][]). If you prepare multiple transactions at the same time, you must use sequentially increasing `Sequence` numbers in the order you want the transactions to execute.
 
-Example (enable RequireAuth):
+Example (enable Require Auth):
 
 <!-- MULTICODE_BLOCK_START -->
 

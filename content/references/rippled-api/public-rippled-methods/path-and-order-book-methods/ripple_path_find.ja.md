@@ -1,5 +1,13 @@
+---
+html: ripple_path_find.html
+parent: path-and-order-book-methods.html
+blurb: すぐに利用できるペイメントパスを含む1つの応答を返します。
+labels:
+  - 複数通貨間
+  - トークン
+---
 # ripple_path_find
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/RipplePathFind.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/RipplePathFind.cpp "Source")
 
 `ripple_path_find`メソッドは、[path_findメソッド][]のシンプルなバージョンであり、すぐに利用できる[ペイメントパス](paths.html)を含む1つの応答を返します。WebSocket APIとJSON-RPC APIの両方で使用できます。ただし、結果は時間の経過とともに古くなる傾向にあります。最新の状態を維持するために複数のコールを実行する代わりに、可能な場合には[path_findメソッド][]を使用して、継続的な更新をサブスクライブします。
 
@@ -14,7 +22,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id":8,
    "command":"ripple_path_find",
@@ -38,7 +46,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method":"ripple_path_find",
    "params":[
@@ -65,7 +73,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax ripple_path_find json ledger_index|ledger_hash
 rippled ripple_path_find '{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", "source_currencies":[ { "currency":"XRP" }, { "currency":"USD" } ], "destination_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", "destination_amount":{ "value":"0.001", "currency":"USD", "issuer":"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B" } }'
 ```
@@ -94,7 +102,7 @@ rippled ripple_path_find '{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"
 
 *WebSocket*
 
-```
+```json
 {
    "id":8,
    "status":"success",
@@ -203,8 +211,9 @@ rippled ripple_path_find '{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "alternatives":[

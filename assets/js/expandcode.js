@@ -1,20 +1,24 @@
-var toggle_cs = function(eo) {
-    //eo = $("#"+id);
-    var wrapper = $(eo.target).parent();
-    var code_el = wrapper.find("code");
+const tExpand='<i class="fa fa-expand"></i><span class="sr-only">Expand</span>'
+const tCollapse='<i class="fa fa-compress"></i><span class="sr-only">Shrink</span>'
+
+function toggle_cs(eo) {
+    const wrapper = $(eo.target).closest(".code_sample");
+    const code_el = wrapper.find("code");
     code_el.toggleClass('expanded');
-    var placeholders = wrapper.find(".code-placeholder");
+    const placeholders = wrapper.find(".code-placeholder");
     if (placeholders.length) {
+        // collapsing
         placeholders.remove();
+        $(window).scrollTop(code_el.offset().top - 124)
     } else {
         code_el.after("<div class='code-placeholder' style='width:"
-                            + code_el.width()
+                            + code_el.outerWidth()
                             + "px; height:"
-                            + code_el.height()
+                            + code_el.outerHeight()
                             + "px;'>&nbsp;</div>");
     }
-    current_button_text = wrapper.find(".code_toggler").val();
-    $(eo.target).val(current_button_text == 'Expand' ? "Collapse" : "Expand");
+    current_button_expanded = code_el.hasClass('expanded');
+    $(wrapper.find(".code_toggler")).html(current_button_expanded ? tCollapse : tExpand);
 }
 
 function has_scrollbars(e) {
@@ -40,7 +44,7 @@ function make_code_expandable() {
       if (has_scrollbars(this)) {
         jqThis.dblclick(toggle_cs);
         jqThis.attr('title', 'Double-click to expand/collapse');
-        var newbtn = $("<input type='button' class='code_toggler' value='Expand' />");
+        var newbtn = $(`<button class='code_toggler btn btn-outline-secondary'>${tExpand}</button>`);
         newbtn.appendTo(jqThis.parents(".code_sample"));
       }
     });

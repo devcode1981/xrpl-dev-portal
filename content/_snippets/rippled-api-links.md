@@ -15,20 +15,28 @@
 [Hash]: basic-data-types.html#hashes
 [ハッシュ]: basic-data-types.html#ハッシュ
 [identifying hash]: transaction-basics.html#identifying-transactions
+[識別用ハッシュ]: transaction-basics.html#トランザクションの識別
 [Internal Type]: serialization.html
 [内部の型]: serialization.html
 [Ledger Index]: basic-data-types.html#ledger-index
 [ledger index]: basic-data-types.html#ledger-index
 [レジャーインデックス]: basic-data-types.html#レジャーインデックス
-[ledger format]: ledger-data-formats.html
+[ledger format]: ledger-object-types.html
+[レジャーフォーマット]: ledger-data-formats.html
 [Marker]: markers-and-pagination.html
 [マーカー]: markers-and-pagination.html
 [node public key]: peer-protocol.html#node-key-pair
+[ノード公開鍵]: peer-protocol.html#ノードキーペア
 [node key pair]: peer-protocol.html#node-key-pair
+[ノードキーペア]: peer-protocol.html#ノードキーペア
 [peer reservation]: peer-protocol.html#fixed-peers-and-peer-reservations
 [peer reservations]: peer-protocol.html#fixed-peers-and-peer-reservations
+[ピアリザベーション]: peer-protocol.html#固定ピアとピアリザベーション
+[public servers]: public-servers.html
+[公開サーバー]: public-servers.html
 [result code]: transaction-results.html
 [seconds since the Ripple Epoch]: basic-data-types.html#specifying-time
+[Reporting Mode]: rippled-server-modes.html#reporting-mode
 [Rippleエポック以降の経過秒数]: basic-data-types.html#時間の指定
 [Sequence Number]: basic-data-types.html#account-sequence
 [シーケンス番号]: basic-data-types.html#アカウントシーケンス
@@ -39,6 +47,7 @@
 [レジャーの指定]: basic-data-types.html#レジャーの指定
 [Specifying Time]: basic-data-types.html#specifying-time
 [時間の指定]: basic-data-types.html#時間の指定
+[stand-alone mode]: rippled-server-modes.html#stand-alone-mode
 [standard format]: response-formatting.html
 [標準フォーマット]: response-formatting.html
 [Transaction Cost]: transaction-cost.html
@@ -51,6 +60,8 @@
 
 <!-- API object types -->
 [AccountRoot object]: accountroot.html
+[AccountRootオブジェクト]: accountroot.html
+[Ticket object]: ticket.html
 
 <!--{# Links to external sites #}-->
 [crypto-condition]: https://tools.ietf.org/html/draft-thomas-crypto-conditions-04
@@ -95,6 +106,7 @@
   "ledger_request",
   "log_level",
   "logrotate",
+  "manifest",
   "noripple_check",
   "path_find",
   "peer_reservations_add",
@@ -119,6 +131,7 @@
   "unsubscribe",
   "validation_create",
   "validation_seed",
+  "validator_info",
   "validator_list_sites",
   "validators",
   "wallet_propose"
@@ -137,6 +150,7 @@
   "Checks",
   "CryptoConditions",
   "CryptoConditionsSuite",
+  "DeletableAccounts",
   "DepositAuth",
   "DepositPreauth",
   "EnforceInvariants",
@@ -154,18 +168,24 @@
   "fix1571",
   "fix1578",
   "fix1623",
+  "fixCheckThreading",
   "fixMasterKeyAsRegularKey",
+  "fixPayChanRecipientOwnerDir",
+  "fixQualityUpperBound",
   "fixTakerDryOfferRemoval",
   "Flow",
   "FlowCross",
   "FlowV2",
   "MultiSign",
   "MultiSignReserve",
+  "NegativeUNL",
   "OwnerPaysFee",
   "PayChan",
+  "RequireFullyCanonicalSig",
   "SHAMapV2",
   "SortedDirectories",
   "SusPay",
+  "TicketBatch",
   "Tickets",
   "TickSize",
   "TrustSetAuth"

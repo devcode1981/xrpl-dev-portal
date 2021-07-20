@@ -21,13 +21,17 @@ const set_up_tx_sender = async function() {
   }
 
   function logTx(txtype, hash, result) {
-    let li = "wtf"
-    // Future feature: link hash to a testnet txsplainer
+    let classes
+    let icon
+    const txlink = "https://testnet.xrpl.org/transactions/" + hash
     if (result === "tesSUCCESS") {
-      li = '<li class="list-group-item fade-in p-1 text-muted"><i class="fa fa-check-circle"></i> '+txtype+": "+hash+'</li>'
+      classes = "text-muted"
+      icon = '<i class="fa fa-check-circle"></i>'
     } else {
-      li = '<li class="list-group-item fade-in p-1 list-group-item-danger"><i class="fa fa-times-circle"></i> '+txtype+": "+hash+'</li>'
+      classes = "list-group-item-danger"
+      icon = '<i class="fa fa-times-circle"></i>'
     }
+    const li = `<li class="list-group-item fade-in p-1 ${classes}">${icon} ${txtype}: <a href="${txlink}" target="_blank" class="external-link">${hash}</a></li>`
 
     $("#tx-sender-history ul").prepend(li)
   }
@@ -235,14 +239,25 @@ const set_up_tx_sender = async function() {
     }
     $("#pp_progress .progress-bar").width("20%")
 
-    // 2. Set DefaultRipple on issuer
+    // Wait for the address's funding to be validated so we don't get the wrong
+    // starting sequence number.
+    while (true) {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        await api.request("account_info", {account: pp_issuer_address,
+          ledger_index: "validated"})
+        break
+      } catch(e) {}
+    }
+
+    // 2. Set Default Ripple on issuer
     let resp = await submit_and_verify({
       TransactionType: "AccountSet",
       Account: pp_issuer_address,
       SetFlag: 8
     }, pp_issuer_secret, true)
     if (resp === undefined) {
-      console.log("Couldn't set DefaultRipple for partial payment issuer")
+      console.log("Couldn't set Default Ripple for partial payment issuer")
       return
     }
     $("#pp_progress .progress-bar").width("40%")
@@ -307,8 +322,31 @@ const set_up_tx_sender = async function() {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // Button Handlers
+  // Button/UI Handlers
   //////////////////////////////////////////////////////////////////////////////
+
+  // Destination Address box -----------------------------------------------
+  async function on_dest_address_update(event) {
+    const d_a = $("#destination_address").val()
+    if (api.isValidAddress(d_a)) {
+      $("#destination_address").addClass("is-valid").removeClass("is-invalid")
+      if (d_a[0] == "X") {
+        $("#x-address-warning").show()
+      } else {
+        $("#x-address-warning").hide()
+      }
+    } else {
+      $("#destination_address").addClass("is-invalid").removeClass("is-valid")
+      $("#x-address-warning").hide()
+    }
+  }
+  $("#destination_address").change(on_dest_address_update)
+  const search_params = new URLSearchParams(window.location.search)
+  if (search_params.has("destination")) {
+    const d_a = search_params.get("destination")
+    $("#destination_address").val(d_a)
+    on_dest_address_update()
+  }
 
   // 1. Send XRP Payment Handler -------------------------------------------
   async function on_click_send_xrp_payment(event) {

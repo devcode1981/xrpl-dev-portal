@@ -1,3 +1,10 @@
+---
+html: transaction-queue.html
+parent: consensus-network.html
+blurb: Understand how transactions can be queued before reaching consensus.
+labels:
+  - Transaction Sending
+---
 # Transaction Queue
 
 The `rippled` server uses a transaction queue to help enforce the [open ledger cost](transaction-cost.html#open-ledger-cost). The open ledger cost sets a target number of transactions in a given ledger, and escalates the required transaction cost very quickly when the open ledger surpasses this size. Rather than discarding transactions that cannot pay the escalated transaction cost, `rippled` tries to put them in a transaction queue, which it uses to build the next ledger.
@@ -6,7 +13,7 @@ The `rippled` server uses a transaction queue to help enforce the [open ledger c
 
 The transaction queue plays an important role in selecting the transactions that are included or excluded from a given ledger version in the consensus process. The following steps describe how the transaction queue relates to the [consensus process](consensus.html).
 
-[![Transaction queue and consensus diagram](img/consensus-with-queue.png)](img/consensus-with-queue.png)
+{{ include_svg("img/consensus-with-queue.svg", "Transaction queue and consensus diagram") }}
 
 1. **Consensus Round 1** - Each validator proposes a set of transactions to be included in the next ledger version. Each also keeps a queue of candidate transactions not currently proposed.
 

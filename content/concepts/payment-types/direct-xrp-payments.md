@@ -1,3 +1,11 @@
+---
+html: direct-xrp-payments.html
+parent: payment-types.html
+blurb: Direct XRP payments are the simplest way to send value in the XRP Ledger.
+labels:
+  - XRP
+  - Payments
+---
 # Direct XRP Payments
 
 The basis of any financial system is _transferring value_: or, in one word, payments. The simplest type of payment in the XRP Ledger is a direct XRP-to-XRP payment, which transfers XRP directly from one account in the XRP Ledger to another.
@@ -15,7 +23,7 @@ Generally, any address in the XRP Ledger can send XRP directly to any other addr
 }
 ```
 
-These transaction instructions mean: Send a payment from rf1Bi... to ra5nK... delivering exactly 13 XRP. If the transaction is successfully processed, it does exactly that. Since it usually takes about 4 seconds for each new ledger version to become [validated](consensus.html), a successful transaction can be created, submitted, executed, and have a final outcome in 8 seconds or less, even if gets queued for the ledger version after the current in-progress one.
+These transaction instructions mean: Send a payment from `rf1Bi...` to `ra5nK...` delivering exactly 13 XRP. If the transaction is successfully processed, it does exactly that. Since it usually takes about 4 seconds for each new ledger version to become [validated](consensus.html), a successful transaction can be created, submitted, executed, and have a final outcome in 8 seconds or less, even if gets queued for the ledger version after the current in-progress one.
 
 **Caution:** The [Payment transaction type][Payment] can also be used for some more specialized kinds of payments, including [cross-currency payments](cross-currency-payments.html) and [partial payments](partial-payments.html). In the case of partial payments, it is possible that the `Amount` shows a large amount of XRP even if the transaction only delivered a very small amount. See [partial payments exploit](partial-payments.html#partial-payments-exploit) for how to avoid crediting a customer for the wrong amount.
 
@@ -52,7 +60,7 @@ From a relatively high level, the XRP Ledger's transaction processing engine app
 
 2. It checks whether the receiving address is a funded account.
 
-    - If the receiving address is funded, it checks whether the receiving address has any limitations on receiving payments, such as [DepositAuth](depositauth.html) or [RequireDest](source-and-destination-tags.html#requiring-tags). If the payment does not meet any such limitations, the payment fails.
+    - If the receiving address is funded, the engine checks any additional requirements for receiving payments, such as [Deposit Authorization](depositauth.html) or [`RequireDest`](source-and-destination-tags.html#requiring-tags). If the payment does not satisfy any of these additional requirements, the payment fails.
     - If the receiving address is not funded, it checks whether the payment would deliver enough XRP to meet the minimum [account reserve](reserves.html). If not, the payment fails.
 
 3. It debits the sending account by an amount of XRP specified by the `Amount` field plus the XRP to be destroyed for the [transaction cost](transaction-cost.html) and credits the receiving account for the same amount.
@@ -66,7 +74,7 @@ From a relatively high level, the XRP Ledger's transaction processing engine app
 
 - **Direct XRP Payments** are the only way to both send and receive XRP in a single transaction. They are a good balance of speed, simplicity, and low cost.
 - [Cross-currency payments](cross-currency-payments.html) also use the [Payment][] transaction type, but can send any combination of XRP and non-XRP [issued currencies](issued-currencies.html) except XRP-to-XRP. They can also be [partial payments](partial-payments.html). Cross-currency payments are good for payments not denominated in XRP or for taking arbitrage opportunities in the [decentralized exchange](decentralized-exchange.html).
-- [Checks](checks.html) :not_enabled: let the sender set up an obligation without transferring any money immediately. The recipient can cash it any time before it expires, but the amount is not guaranteed. Checks can send either XRP or issued currencies. Checks are good for giving the recipient the autonomy to claim the payment.
+- [Checks](checks.html) let the sender set up an obligation without transferring any money immediately. The recipient can cash it any time before it expires, but the amount is not guaranteed. Checks can send either XRP or issued currencies. Checks are good for giving the recipient the autonomy to claim the payment.
 - [Escrow](escrow.html) sets aside XRP which can be claimed by its intended recipient when certain conditions are met. The XRP amount is fully guaranteed and cannot be otherwise used by the sender unless the Escrow expires. Escrow is good for smart contracts in large amounts.
 - [Payment Channels](payment-channels.html) set aside XRP. The recipient can claim XRP from the channel in bulk using signed authorizations. Individual authorizations can be verified without sending a full XRP Ledger transaction. Payment channels are good for extremely high-volume micropayments or "streaming" payments.
 

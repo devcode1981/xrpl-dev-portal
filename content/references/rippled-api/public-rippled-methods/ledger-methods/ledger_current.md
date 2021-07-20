@@ -1,3 +1,10 @@
+---
+html: ledger_current.html
+parent: ledger-methods.html
+blurb: Get the current working ledger version.
+labels:
+  - Blockchain
+---
 # ledger_current
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerCurrent.cpp "Source")
 
@@ -11,7 +18,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
    "id": 2,
    "command": "ledger_current"
@@ -20,7 +27,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "ledger_current",
     "params": [
@@ -31,7 +38,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: ledger_current
 rippled ledger_current
 ```
@@ -50,7 +57,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "status": "success",
@@ -63,13 +70,25 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "ledger_current_index": 8696233,
         "status": "success"
     }
+}
+```
+
+*Commandline*
+
+```json
+{
+   "result" : {
+      "ledger_current_index" : 56844050,
+      "status" : "success"
+   }
 }
 ```
 

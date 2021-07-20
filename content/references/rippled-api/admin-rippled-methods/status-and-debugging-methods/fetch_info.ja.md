@@ -1,5 +1,12 @@
+---
+html: fetch_info.html
+parent: status-and-debugging-methods.html
+blurb: このサーバーが現在ネットワークからフェッチしているオブジェクトに関する情報を返します。
+labels:
+  - コアサーバー
+---
 # fetch_info
-[[ソース]<br>](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/FetchInfo.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/FetchInfo.cpp "Source")
 
 `fetch_info`コマンドは、このサーバーが現在ネットワークからフェッチしているオブジェクトに関する情報と、その情報を所有しているピアの数を返します。これは現在の取得操作をリセットする場合にも使用できます。
 
@@ -12,7 +19,7 @@ _`fetch_info`メソッドは、権限のないユーザーは実行できない[
 
 *WebSocket*
 
-```
+```json
 {
    "id": 91,
    "command": "fetch_info",
@@ -22,7 +29,7 @@ _`fetch_info`メソッドは、権限のないユーザーは実行できない[
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "fetch_info",
    "params": [
@@ -35,7 +42,7 @@ _`fetch_info`メソッドは、権限のないユーザーは実行できない[
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: fetch_info [clear]
 rippled fetch_info
 ```
@@ -56,7 +63,7 @@ rippled fetch_info
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "info" : {
@@ -94,9 +101,10 @@ rippled fetch_info
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "info" : {
@@ -138,7 +146,7 @@ Connecting to 127.0.0.1:5005
 
 | `Field` | 型   | 説明                                               |
 |:--------|:-------|:----------------------------------------------------------|
-| `info`  | オブジェクト | フェッチ対象のオブジェクトと、そのフェッチ対象オブジェクトのステータスのマップ。フェッチ対象のレジャーはそのシーケンス番号によって識別されます。フェッチ対象のレジャーとその他のオブジェクトがハッシュによって識別されることもあります。 |
+| `info`  | オブジェクト | フェッチ対象のオブジェクトと、そのフェッチ対象オブジェクトのステータスのマップ。フェッチ対象のレジャーはその[レジャーインデックス]によって識別されます。フェッチ対象のレジャーとその他のオブジェクトがハッシュによって識別されることもあります。 |
 
 進行中のフェッチ操作を記述するフィールドは、予告なく変更される可能性があります。以下のフィールドが含まれている可能性があります。
 

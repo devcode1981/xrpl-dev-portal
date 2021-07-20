@@ -1,3 +1,11 @@
+---
+html: validation_create.html
+parent: key-generation-methods.html
+blurb: Generate keys for a rippled server to identify itself to the network.
+labels:
+  - Security
+  - Core Server
+---
 # validation_create
 [[Source]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/ValidationCreate.cpp "Source")
 
@@ -17,7 +25,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 0,
     "command": "validation_create",
@@ -27,7 +35,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "validation_create",
     "params": [
@@ -40,7 +48,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: validation_create [secret]
 rippled validation_create "BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE"
 ```
@@ -63,7 +71,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "status" : "success",
@@ -76,9 +84,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success",

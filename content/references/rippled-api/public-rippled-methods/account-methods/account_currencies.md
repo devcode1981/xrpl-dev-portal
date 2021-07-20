@@ -1,3 +1,10 @@
+---
+html: account_currencies.html
+parent: account-methods.html
+blurb: Get a list of currencies an account can send or receive.
+labels:
+  - Tokens
+---
 # account_currencies
 [[Source]](https://github.com/ripple/rippled/blob/df966a9ac6dd986585ecccb206aff24452e41a30/src/ripple/rpc/handlers/AccountCurrencies.cpp "Source")
 
@@ -10,7 +17,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "command": "account_currencies",
     "account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
@@ -21,7 +28,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "account_currencies",
     "params": [
@@ -35,6 +42,13 @@ An example of the request format:
 }
 ```
 
+*Commandline*
+
+```sh
+#Syntax: account_currencies account [ledger_index|ledger_hash] [strict]
+rippled account_currencies rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn validated strict
+```
+
 <!-- MULTICODE_BLOCK_END -->
 
 [Try it! >](websocket-api-tool.html#account_currencies)
@@ -44,9 +58,9 @@ The request includes the following parameters:
 | `Field`        | Type                       | Description                    |
 |:---------------|:---------------------------|:-------------------------------|
 | `account`      | String                     | A unique identifier for the account, most commonly the account's [Address][]. |
-| `strict`       | Boolean                    | _(Optional)_ If true, only accept an address or public key for the account parameter. Defaults to false. |
 | `ledger_hash`  | String                     | _(Optional)_ A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
 | `ledger_index` | String or Unsigned Integer | _(Optional)_ The [ledger index][] of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
+| `strict`       | Boolean                    | _(Optional)_ If `true`, then the `account` field only accepts a public key or XRP Ledger address. Otherwise, `account` can be a secret or passphrase (not recommended). The default is `false`. |
 
 The following field is deprecated and should not be provided: `account_index`.
 
@@ -58,7 +72,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "result": {
         "ledger_index": 11775844,
@@ -93,7 +107,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
 {
     "result": {
@@ -123,6 +137,21 @@ An example of a successful response:
         "status": "success",
         "validated": true
     }
+}
+```
+
+*Commandline*
+
+```json
+{
+   "result" : {
+      "ledger_hash" : "F43A801ED4562FA744A35755B86BE898D91C5643BF499924EA3C69491B8C28D1",
+      "ledger_index" : 56843649,
+      "receive_currencies" : [ "USD" ],
+      "send_currencies" : [ "NGN", "TRC" ],
+      "status" : "success",
+      "validated" : true
+   }
 }
 ```
 

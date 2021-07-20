@@ -1,3 +1,11 @@
+---
+html: validators.html
+parent: status-and-debugging-methods.html
+blurb: Get information about the current validators.
+labels:
+  - Core Server
+  - Blockchain
+---
 # validators
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Validators.cpp "Source")
 
@@ -12,7 +20,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 1,
     "command": "validators"
@@ -21,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "validators",
     "params": [
@@ -32,7 +40,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: validators
 rippled validators
 ```
@@ -49,7 +57,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "id":5,
     "status":"success",
@@ -83,8 +91,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result":{
         "local_static_keys": [],
@@ -116,9 +125,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
     "result":{
         "local_static_keys": [],
@@ -174,7 +184,8 @@ Each member of the `publisher_lists` array is an object with the following field
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

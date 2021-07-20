@@ -1,8 +1,18 @@
+---
+html: diagnosing-problems.html
+parent: troubleshoot-the-rippled-server.html
+blurb: Collect information to identify the cause of problems.
+labels:
+  - Core Server
+---
 # Diagnosing Problems with rippled
 
 If you are having problems with `rippled`, the first step is to collect more information to accurately characterize the problem. From there, it can be easier to figure out a root cause and a fix.
 
-If your server does not start (such as crashing or otherwise shutting down automatically), see [rippled Server Won't Start](server-wont-start.html) for a list of some possible causes and fixes.
+See the following pages for some common categories of problems, their causes, and fixes:
+
+- If your server does not start (such as crashing or otherwise shutting down automatically), see **[rippled Server Won't Start](server-wont-start.html)**.
+- If your server starts, but does not reliably sync or remain synced to the XRP Ledger network, see **[rippled Server Doesn't Sync](server-doesnt-sync.html)**.
 
 The remainder of this document suggests steps for diagnosing problems that happen while your server is up and running (including if the process is active but unable to sync with the network).
 
@@ -96,7 +106,7 @@ The `rippled` executable returns the following message if it wasn't able to conn
 
 This generally indicates one of several problems:
 
-- The `rippled` server is just starting up, or is not running at all. Check the status of the service; if it is running, wait a few seconds and try again.
+- The `rippled` server is starting up, or is not running at all. Check the status of the service; if it is running, wait a few seconds and try again.
 - You may need to pass different [parameters to the `rippled` commandline client](commandline-usage.html#client-mode-options) to connect to your server.
 - The `rippled` server may be configured not to accept JSON-RPC connections.
 
@@ -110,6 +120,43 @@ The default config file sets the log level to severity "warning" for all categor
 It is normal for a `rippled` the server to print many warning-level (`WRN`) messages during startup and a few warning-level messages from time to time later on. You can **safely ignore** most warnings in the first 5 to 15 minutes of server startup.
 
 For a more thorough explanation of various types of log messages, see [Understanding Log Messages](understanding-log-messages.html).
+
+
+## Info Collection Script
+
+If you have problems diagnosing the problem, or you are unable to resolve the problem with any of the common fixes, you may want to ask for help in a support forum or the [GitHub issues](https://github.com/ripple/rippled/issues). When asking for help, you can use an info collection script to gather information about your system to help others diagnose the issue.
+
+The official package installation (for [Ubuntu/Debian](install-rippled-on-ubuntu.html) or [CentOS/RedHat](install-rippled-on-centos-rhel-with-yum.html)) installs such a script by default, to `/opt/ripple/bin/getRippledInfo`. [New in: rippled 1.5.0][] If you compiled `rippled` yourself, you can find the same script [in the `rippled` source code repository](https://github.com/ripple/rippled/blob/develop/bin/getRippledInfo).
+
+To use the script:
+
+1. Run the script while `rippled` is running.
+
+        $ /opt/ripple/bin/getRippledInfo
+
+        ####################################################
+          rippled info has been gathered. Please copy the
+          contents of /tmp/ripple_info.Xo8Xr/rippled_info.md
+          to a github gist at https://gist.github.com/
+
+          PLEASE REVIEW THIS FILE FOR ANY SENSITIVE DATA
+          BEFORE POSTING! We have tried our best to omit
+          any sensitive information from this file, but you
+          should verify before posting.
+        ####################################################
+
+    The script collects the output of many commands and writes them to a temporary file. The filename is randomized with a string of letters and numbers (case-sensitive), for example: `/tmp/ripple_info.Xo8Xr/rippled_info.md`
+
+
+2. Look over the output file for sensitive information.
+
+    The script attempts to scrub sensitive information from the output, such as validator keys or tokens. However, you should still check the output before posting publicly, as a precaution. For example, the script outputs detailed information about your server hardware, and you may want to remove some sections for privacy reasons. Use a text editor to read the output file and to remove anything you don't want to post.
+
+        nano /tmp/ripple_info.Xo8Xr/rippled_info.md
+
+3. Upload the output file where others can see it.
+
+    You can upload the file directly to [GitHub Gist](https://gist.github.com/), [Pastebin](https://pastebin.com/), or a similar service. If you are running `rippled` on a remote server, you may find it easier to first transfer the file to a machine with a web browser, using `scp` or a similar tool. <!-- SPELLING_IGNORE: pastebin -->
 
 
 ## See Also

@@ -1,3 +1,10 @@
+---
+html: consensus-principles-and-rules.html
+parent: consensus-network.html
+blurb: The rules and principles of the consensus algorithm that allow users to transfer funds (including fiat currencies, digital currencies and other forms of value) across national boundaries as seamlessly as sending an email.
+labels:
+  - Blockchain
+---
 # Consensus Principles and Rules
 
 The XRP Ledger is a universal payment system enabling users to transfer funds across national boundaries as seamlessly as sending an email. Like other peer-to-peer payment networks such as Bitcoin, the XRP Ledger enables peer-to-peer transaction settlement across a decentralized network of computers. Unlike other digital currency protocols, the XRP Ledger allows users to denominate their transactions with any currency they prefer, including fiat currencies, digital currencies and other forms of value, in addition to XRP (the native asset of the XRP Ledger).
@@ -51,7 +58,7 @@ The primary role of consensus is for participants in the process to agree on whi
 3. It is extremely rare for a participant to particularly care how the transactions were grouped. Agreement is easiest when everyone’s priority is reaching agreement and only challenging when there are diverging interests.
 4. Deterministic rules can be used even to form the groupings, leading to disagreement only in edge cases. For example, if there are two conflicting transactions in a round, deterministic rules can be used to determine which is included in the next round.
 
-Every participant’s top priority is correctness. They must first enforce the rules to be sure nothing violates the integrity of the shared ledger. For example, a transaction that is not properly signed must never be processed (even if other participants want to be processed). However, every honest participant’s second priority is agreement. A network with possible double spends has no utility at all. Agreement is facilitated by the fact that every honest participant values it above everything but correctness.
+Every participant’s top priority is correctness. They must first enforce the rules to be sure nothing violates the integrity of the shared ledger. For example, a transaction that is not properly signed must never be processed (even if other participants want it to be processed). However, every honest participant’s second priority is agreement. A network with possible double spends has no utility at all, so every honest participant values agreement above everything but correctness.
 
 ### Consensus Rounds
 

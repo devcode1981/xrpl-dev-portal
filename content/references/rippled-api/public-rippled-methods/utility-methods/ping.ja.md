@@ -1,5 +1,12 @@
+---
+html: ping.html
+parent: utility-methods.html
+blurb: 確認応答を返します。これにより、接続のステータスと遅延をテストできます。
+labels:
+  - コアサーバー
+---
 # ping
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Ping.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Ping.cpp "Source")
 
 `ping`コマンドは確認応答を返します。これにより、クライアントは接続のステータスと遅延をテストできます。
 
@@ -10,7 +17,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id":1,
    "command":"ping"
@@ -19,7 +26,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method":"ping",
    "params":[
@@ -30,7 +37,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: ping
 rippled ping
 ```
@@ -49,7 +56,7 @@ rippled ping
 
 *WebSocket*
 
-```
+```json
 {
    "id":1,
    "result":{},
@@ -60,8 +67,9 @@ rippled ping
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "status":"success"

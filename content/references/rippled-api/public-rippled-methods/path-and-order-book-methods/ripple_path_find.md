@@ -1,3 +1,11 @@
+---
+html: ripple_path_find.html
+parent: path-and-order-book-methods.html
+blurb: Find a path for payment between two accounts, once.
+labels:
+  - Cross-Currency
+  - Tokens
+---
 # ripple_path_find
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/RipplePathFind.cpp "Source")
 
@@ -14,7 +22,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 8,
     "command": "ripple_path_find",
@@ -38,7 +46,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "ripple_path_find",
     "params": [
@@ -65,7 +73,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax ripple_path_find json ledger_index|ledger_hash
 rippled ripple_path_find '{"source_account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", "source_currencies": [ { "currency": "XRP" }, { "currency": "USD" } ], "destination_account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", "destination_amount": { "value": "0.001", "currency": "USD", "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B" } }'
 ```
@@ -94,7 +102,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 8,
     "status": "success",
@@ -203,8 +211,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "alternatives": [
@@ -306,6 +315,108 @@ An example of a successful response:
         ],
         "status": "success"
     }
+}
+```
+
+*Commandline*
+```json
+{
+   "result" : {
+      "alternatives" : [
+         {
+            "paths_canonical" : [],
+            "paths_computed" : [
+               [
+                  {
+                     "currency" : "USD",
+                     "issuer" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+                     "type" : 48,
+                     "type_hex" : "0000000000000030"
+                  }
+               ]
+            ],
+            "source_amount" : "5212"
+         },
+         {
+            "paths_canonical" : [],
+            "paths_computed" : [
+               [
+                  {
+                     "account" : "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  },
+                  {
+                     "account" : "rnx1RNE5cJbYzMsJbF3XzyQMxZNBPqdCVd",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  }
+               ],
+               [
+                  {
+                     "account" : "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  },
+                  {
+                     "account" : "ragizZ31TmpachYAuG3n56XCb1R5vc3cTQ",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  }
+               ],
+               [
+                  {
+                     "account" : "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  },
+                  {
+                     "account" : "r9JS9fLbtLzgBCdFCnS3LpVPUBJAmg7PnM",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  }
+               ],
+               [
+                  {
+                     "account" : "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  },
+                  {
+                     "account" : "rDc9zKqfxm43S9LwpNkwV9KgW6PKUPrT5u",
+                     "type" : 1,
+                     "type_hex" : "0000000000000001"
+                  }
+               ]
+            ],
+            "source_amount" : {
+               "currency" : "USD",
+               "issuer" : "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+               "value" : "0.001002"
+            }
+         }
+      ],
+      "destination_account" : "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+      "destination_amount" : {
+         "currency" : "USD",
+         "issuer" : "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+         "value" : "0.001"
+      },
+      "destination_currencies" : [
+         "USD",
+         "015841551A748AD2C1F76FF6ECB0CCCD00000000",
+         "BTC",
+         "DYM",
+         "CNY",
+         "EUR",
+         "JOE",
+         "MXN",
+         "XRP"
+      ],
+      "full_reply" : true,
+      "source_account" : "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+      "status" : "success"
+   }
 }
 ```
 

@@ -1,7 +1,15 @@
+---
+html: consensus_info.html
+parent: status-and-debugging-methods.html
+blurb: デバッグのためのコンセンサスプロセスに関する情報を返します。
+labels:
+  - ブロックチェーン
+  - コアサーバー
+---
 # consensus_info
-[[ソース]<br>](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
 
-`consensus_info`コマンドは、デバッグのためのコンセンサスプロセスに関する情報を返します。
+`consensus_info`メソッドは、デバッグのための[コンセンサスプロセス](consensus.html)に関する情報を返します。
 
 _`consensus_info`メソッドは、権限のないユーザーは実行できない[管理メソッド](admin-rippled-methods.html)です。_
 
@@ -12,7 +20,7 @@ _`consensus_info`メソッドは、権限のないユーザーは実行できな
 
 *WebSocket*
 
-```
+```json
 {
    "id": 99,
    "command": "consensus_info"
@@ -21,7 +29,7 @@ _`consensus_info`メソッドは、権限のないユーザーは実行できな
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "consensus_info",
    "params": [
@@ -32,7 +40,7 @@ _`consensus_info`メソッドは、権限のないユーザーは実行できな
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: consensus_info
 rippled consensus_info
 ```
@@ -49,7 +57,7 @@ rippled consensus_info
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "info" : {
@@ -124,9 +132,10 @@ rippled consensus_info
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "info" : {

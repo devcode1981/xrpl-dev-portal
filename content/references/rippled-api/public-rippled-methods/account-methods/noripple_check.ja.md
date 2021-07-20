@@ -1,5 +1,12 @@
+---
+html: noripple_check.html
+parent: account-methods.html
+blurb: アカウントのDefaultRippleフィールドとそのトラストラインのNoRippleフラグの状態を、推奨される設定と比較して迅速にチェックします。
+labels:
+  - トークン
+---
 # noripple_check
-[[ソース]<br>](https://github.com/ripple/rippled/blob/9111ad1a9dc37d49d085aa317712625e635197c0/src/ripple/rpc/handlers/NoRippleCheck.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/9111ad1a9dc37d49d085aa317712625e635197c0/src/ripple/rpc/handlers/NoRippleCheck.cpp "Source")
 
 `noripple_check`コマンドを使用すると、[アカウントのDefaultRippleフィールドとそのトラストラインのNoRippleフラグ](rippling.html)の状態を、推奨される設定と比較して迅速にチェックできます。
 
@@ -10,7 +17,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": 0,
    "command": "noripple_check",
@@ -24,7 +31,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "noripple_check",
    "params": [
@@ -62,7 +69,7 @@
 
 *WebSocket*
 
-```
+```json
 {
  "id": 0,
  "status": "success",
@@ -114,7 +121,7 @@
 
 *JSON-RPC*
 
-```
+```json
 200 OK
 {
    "result": {

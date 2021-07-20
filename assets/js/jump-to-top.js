@@ -1,20 +1,5 @@
 $(document).ready(function() {
 
-  // Mobile menu.  
-  $('[data-toggle="slide-collapse"]').on('click', function() {
-    $navMenuCont = $($(this).data('target'));
-    $navMenuCont.toggleClass('show');
-    $(".menu-overlay").toggleClass('active');
-  });
-  $(".menu-overlay").click(function(event) {
-    $(".navbar-toggler").trigger("click");
-  });
-  
-
-
-
-
-
   var TO_TOP_MIN = 50;
   var TO_TOP_SPEED = 500;
   var TO_TOP_POS = 0;
@@ -26,6 +11,15 @@ $(document).ready(function() {
     }
   });
   $(".jump-to-top").click(function() {
-    $("body").animate({scrollTop: TO_TOP_POS}, TO_TOP_SPEED)
+    $("html").animate({scrollTop: TO_TOP_POS}, TO_TOP_SPEED)
   });
+
+  // TODO: put this somewhere better.
+  // Code to make other menu items hide on mobile when we expand one
+  $("#topnav-pages .dropdown").on("show.bs.dropdown", (evt) => {
+    $("#top-main-nav").addClass("submenu-expanded")
+  })
+  $("#topnav-pages .dropdown").on("hidden.bs.dropdown", (evt) => {
+    $("#top-main-nav").removeClass("submenu-expanded")
+  })
 });

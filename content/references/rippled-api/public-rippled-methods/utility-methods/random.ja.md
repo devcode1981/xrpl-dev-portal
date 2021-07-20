@@ -1,5 +1,12 @@
+---
+html: random.html
+parent: utility-methods.html
+blurb: クライアントが乱数生成のエントロピー生成源として使用する乱数を提供します。
+labels:
+  - コアサーバー
+---
 # random
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Random.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Random.cpp "Source")
 
 `random`コマンドは、クライアントが乱数生成のエントロピー生成源として使用する乱数を提供します。
 
@@ -10,7 +17,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id":1,
    "command":"random"
@@ -19,7 +26,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method":"random",
    "params":[
@@ -30,7 +37,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: random
 rippled random
 ```
@@ -47,7 +54,7 @@ rippled random
 
 *WebSocket*
 
-```
+```json
 {
    "id":1,
    "result":{
@@ -60,8 +67,9 @@ rippled random
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "random":"4E57146AA47BC6E88FDFE8BAA235B900126C916B6CC521550996F590487B837A",

@@ -1,3 +1,10 @@
+---
+html: log_level.html
+parent: logging-and-data-management-methods.html
+blurb: Get or modify log verbosity.
+labels:
+  - Data Retention
+---
 # log_level
 [[Source]](https://github.com/ripple/rippled/blob/155fcdbcd0b4927152892c8c8be01d9cf62bed68/src/ripple/rpc/handlers/LogLevel.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "ll1",
     "command": "log_level",
@@ -23,7 +30,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: log_level [[partition] severity]
 rippled log_level PathRequest debug
 ```
@@ -45,9 +52,10 @@ Examples of successful responses:
 
 *Commandline (set log level)*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success"
@@ -57,9 +65,10 @@ Connecting to 127.0.0.1:5005
 
 *Commandline (check log levels)*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "levels" : {

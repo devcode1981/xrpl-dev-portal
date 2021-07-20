@@ -1,3 +1,10 @@
+---
+html: fee.html
+parent: server-info-methods.html
+blurb: Get information about transaction cost.
+labels:
+  - Fees
+---
 # fee
 [[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/Fee1.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "fee_websocket_example",
   "command": "fee"
@@ -21,7 +28,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "fee",
     "params": [{}]
@@ -30,7 +37,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: fee
 rippled fee
 ```
@@ -47,7 +54,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "fee_websocket_example",
   "status": "success",
@@ -76,8 +83,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "current_ledger_size": "56",
@@ -104,9 +112,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "current_ledger_size" : "16",
@@ -155,7 +164,7 @@ The response follows the [standard format][], with a successful result containin
 
 ## Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
 
 
 <!--{# common link defs #}-->

@@ -1,5 +1,13 @@
+---
+html: feature.html
+parent: status-and-debugging-methods.html
+blurb: Amendmentに関してこのサーバーが認識している情報を返します。
+labels:
+  - ブロックチェーン
+  - コアサーバー
+---
 # feature
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Feature1.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Feature1.cpp "Source")
 
 `feature`コマンドは、[Amendment](amendments.html)に関してこのサーバーが認識している情報（Amendmentが有効であるかどうか、サーバーが[Amendmentプロセス](amendments.html#amendmentプロセス)でこれらのAmendmentに賛成票を投じたかどうかなど）を返します。[新規: rippled 0.31.0][]
 
@@ -14,7 +22,7 @@ _`feature`メソッドは、権限のないユーザーは実行できない[管
 
 *WebSocket - すべてリスト*
 
-```
+```json
 {
  "id": "list_all_features",
  "command": "feature"
@@ -23,7 +31,7 @@ _`feature`メソッドは、権限のないユーザーは実行できない[管
 
 *WebSocket - 拒否*
 
-```
+```json
 {
  "id": "reject_multi_sign",
  "command": "feature",
@@ -34,7 +42,7 @@ _`feature`メソッドは、権限のないユーザーは実行できない[管
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "feature",
    "params": [
@@ -48,7 +56,7 @@ _`feature`メソッドは、権限のないユーザーは実行できない[管
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: feature [<feature_id> [accept|reject]]
 rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373 accept
 ```
@@ -72,7 +80,7 @@ rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373
 
 *WebSocket - すべてリスト*
 
-```
+```json
 {
  "id": "list_all_features",
  "status": "success",
@@ -116,7 +124,7 @@ rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373
 
 *WebSocket - 拒否*
 
-```
+```json
 {
    "id": "reject_multi_sign",
    "status": "success",
@@ -136,8 +144,9 @@ rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result": {
        "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373": {
@@ -153,9 +162,10 @@ rippled feature 4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result": {
        "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373": {

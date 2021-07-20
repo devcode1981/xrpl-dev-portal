@@ -1,5 +1,12 @@
+---
+html: get_counts.html
+parent: status-and-debugging-methods.html
+blurb: サーバーの健全性に関するさまざまな統計情報を提供します。
+labels:
+  - コアサーバー
+---
 # get_counts
-[[ソース]<br>](https://github.com/ripple/rippled/blob/c7118a183a660648aa88a3546a6b2c5bce858440/src/ripple/rpc/handlers/GetCounts.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/c7118a183a660648aa88a3546a6b2c5bce858440/src/ripple/rpc/handlers/GetCounts.cpp "Source")
 
 `get_counts`コマンドは、サーバーの健全性に関するさまざまな統計情報を提供します。そのほとんどは、現在メモリーに格納されている各種オブジェクトの数です。
 
@@ -12,7 +19,7 @@ _`get_counts`メソッドは、権限のないユーザーは実行できない[
 
 *WebSocket*
 
-```
+```json
 {
    "id": 90,
    "command": "get_counts",
@@ -22,7 +29,7 @@ _`get_counts`メソッドは、権限のないユーザーは実行できない[
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "get_counts",
    "params": [
@@ -35,7 +42,7 @@ _`get_counts`メソッドは、権限のないユーザーは実行できない[
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: get_counts [min_count]
 rippled get_counts 100
 ```
@@ -56,7 +63,7 @@ rippled get_counts 100
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "AL_hit_rate" : 48.36725616455078,
@@ -93,9 +100,10 @@ rippled get_counts 100
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "AL_hit_rate" : 48.36725616455078,

@@ -1,3 +1,13 @@
+---
+html: run-rippled-as-a-validator.html
+parent: configure-rippled.html
+blurb: Have your server vote on the consensus ledger.
+labels:
+  - Core Server
+  - Blockchain
+top_nav_grouping: Popular Pages
+top_nav_name: Join UNL
+---
 # Run rippled as a Validator
 
 A [`rippled` server](the-rippled-server.html) running in [validator mode](rippled-server-modes.html) does everything a stock server does:
@@ -18,7 +28,7 @@ Even if your validator isn't a _trusted_ validator, it stills plays an important
 
 ## 1. Understand the traits of a good validator
 
-Strive to have your validator always embody the following properties. Being a good validator helps `rippled` server operators and validator list publishers, such as [https://vl.ripple.com](https://vl.ripple.com), to trust your validator before adding it to their UNLs.
+Strive to have your validator always embody the following properties. Being a good validator helps `rippled` server operators and validator list publishers, such as [https://vl.ripple.com](https://vl.ripple.com) and [https://vl.xrplf.org](https://vl.xrplf.org), to trust your validator before adding it to their UNLs.
 
 - **Available**
 
@@ -34,7 +44,7 @@ Strive to have your validator always embody the following properties. Being a go
 
 - **Identified**
 
-    A good validator has a clearly identified owner. Providing [domain verification](#6-provide-domain-verification) is a good start. Ideally, XRP Ledger network UNLs include validators operated by different owners in multiple legal jurisdictions and geographic areas. This reduces the chance that any localized events could interfere with the impartial operations of trusted validators.
+    A good validator has a clearly identified owner. Providing [domain verification](#6-provide-domain-verification) is a good start. Ideally, XRP Ledger network UNLs include validators run by different owners in multiple legal jurisdictions and geographic areas. This reduces the chance that any localized events could interfere with the impartial operations of trusted validators.
 
 Ripple (the company) publishes a [validator list](https://github.com/ripple/rippled/blob/develop/cfg/validators-example.txt) with a set of recommended validators. Ripple strongly recommends using exactly this list for production servers.
 
@@ -48,7 +58,7 @@ For more information, see [Install `rippled`](install-rippled.html).
 
 ## 3. Enable validation on your `rippled` server
 
-Enabling validation on your `rippled` server means providing a validator token in your server's `rippled.cfg` file. Ripple recommends using the `validator-keys` tool (included in `rippled` RPMs) to securely generate and manage your validator keys and tokens.
+Enabling validation on your `rippled` server means providing a validator token in your server's `rippled.cfg` file. Ripple recommends using the `validator-keys` tool (included in `rippled` packages) to securely generate and manage your validator keys and tokens.
 
 In a location **not** on your validator:
 
@@ -72,7 +82,7 @@ In a location **not** on your validator:
 
         This file should be stored securely and not shared.
 
-      **Warning:** Store the generated `validator-keys.json` key file in a secure, offline, and recoverable location, such as an encrypted USB flash drive. Do not modify its contents. In particular, be sure to not store the key file on the validator where you intend to use the keys. If your validator's `secret_key` is compromised, [revoke the key](https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md#key-revocation) immediately.
+      **Warning:** Store the generated `validator-keys.json` key file in a secure, offline, and recoverable location, such as an encrypted USB flash drive. Do not store keys on the validator where you intend to use the keys. If your `secret_key` is compromised, [revoke the key](https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md#key-revocation) immediately. Do not modify the contents of `validator-keys.json`, except to update the backup after generating a new token. If you generate more than one token from the same backup without updating, the network ignores the later tokens because they use the same `token_sequence` number.
 
       For more information about the `validator-keys` tool and the key pairs it generates, see the [Validator Keys Tool Guide](https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md).
 
@@ -80,7 +90,7 @@ In a location **not** on your validator:
 
         $ validator-keys create_token --keyfile /PATH/TO/YOUR/validator-keys.json
 
-      Sample output:
+    Sample output:
 
         Update rippled.cfg file with these values:
 
@@ -133,7 +143,7 @@ For a comparison of these approaches, see [Pros and Cons of Peering Configuratio
 
 This configuration connects your validator to the XRP Ledger network using [discovered peers](peer-protocol.html#peer-discovery). This is the default behavior for `rippled` servers.
 
-_**To connect your validator to the XRP Ledger network using discovered peers,**_ omit the `[peer_private]` stanza or set it to `0` in your validator's `rippled.cfg` file. The [example rippled.cfg file](https://github.com/ripple/rippled/blob/develop/cfg/rippled-example.cfg) is delivered with this configuration.
+_**To connect your validator to the XRP Ledger network using discovered peers,**_ omit the `[peer_private]` stanza or set it to `0` in your validator's `rippled.cfg` file. The [example `rippled.cfg` file](https://github.com/ripple/rippled/blob/develop/cfg/rippled-example.cfg) is delivered with this configuration.
 
 
 ### Connect using proxies
@@ -154,7 +164,7 @@ _**To connect your validator to the XRP Ledger network using proxies:**_
 
     - Inbound traffic: Only from IP addresses of the stock `rippled` servers in the cluster you configured.
 
-    - Outbound traffic: Only to the IP addresses of the stock `rippled` servers in the cluster you configured and to <https://vl.ripple.com> through port 443.
+    - Outbound traffic: Only to the IP addresses of the stock `rippled` servers in the cluster you configured and to your UNL list providers through port 443.
 
 5. Restart `rippled`.
 
@@ -169,15 +179,16 @@ _**To connect your validator to the XRP Ledger network using proxies:**_
 
 ### Connect using public hubs
 
-This configuration connects your validator to the network using two [public hubs](rippled-server-modes.html#public-hubs). This configuration is similar to [connecting using proxies you run yourself](#connect-using-proxies), but instead you connect through public hubs.
+This configuration connects your validator to the network using three [public hubs](rippled-server-modes.html#public-hubs). This configuration is similar to [connecting using proxies you run yourself](#connect-using-proxies), but instead you connect through public hubs.
 
 _**To connect your validator to the network using public hubs:**_
 
-1. In your validator's `rippled.cfg` file, include the following `[ips_fixed]` stanza. The two values, `r.ripple.com 51235` and `zaphod.alloy.ee 51235`, are default public hubs. This stanza tells `rippled` to always attempt to maintain peer connections with these public hubs.
+1. In your validator's `rippled.cfg` file, include the following `[ips_fixed]` stanza. The three values, `r.ripple.com 51235`, `zaphod.alloy.ee 51235` and `sahyadri.isrdc.in 51235`, are default public hubs. This stanza tells `rippled` to always attempt to maintain peer connections with these public hubs.
 
         [ips_fixed]
         r.ripple.com 51235
         zaphod.alloy.ee 51235
+        sahyadri.isrdc.in 51235
 
     **Caution:** This configuration connects your validator to the network using default public hubs. Because these are the _default_ public hubs, they may sometimes be too busy to provide your validator with a connection to the network. To help avoid this issue, connect to more public hubs and, even better, connect to non-default public hubs.
 
@@ -224,52 +235,21 @@ Here are some methods you can use to verify that your validator has a healthy co
 
 ## 6. Provide domain verification
 
-To help validation list publishers and other participants in the XRP Ledger network understand who operates your validator, provide domain verification for your validator. At a high level, domain verification is a two-way link:
+To help validation list publishers and other participants in the XRP Ledger network understand who runs your validator, provide domain verification for your validator. At a high level, domain verification is a two-way link:
 
 - Use your domain to claim ownership of a validator key.
 
 - Use your validator key to claim ownership of a domain.
 
-Creating this link establishes strong evidence that you own both the validator key and the domain. Providing this evidence is just one aspect of [being a good validator](#1-understand-the-traits-of-a-good-validator).
+Creating this link establishes strong evidence that you own both the validator key and the domain. Providing this evidence is one aspect of [being a good validator](#1-understand-the-traits-of-a-good-validator).
 
 To provide domain verification:
 
-1. Choose a domain name you own that you want to be publicly associated with your validator. You must run a public-facing HTTPS server on port 443 of that domain and you must have access to the private key file associated with that server's TLS certificate. (Note: [TLS was formerly called SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security).) As a precaution against DDoS attempts, your domain name should not resolve to the ip address of your validator.
+1. Choose a domain name you own that you want to be publicly associated with your validator. As a precaution against DDoS attempts, your domain name should not resolve to the ip address of your validator.
 
-2. Share your validator's public key with the public, especially other `rippled` operators. For example, you can share your validator's public key on your website, on social media, in the [XRPChat community forum](https://www.xrpchat.com/), or in a press release.
+2. Serve an [`xrp-ledger.toml`](xrp-ledger-toml.html) file at your domain, and complete the [domain verification](xrp-ledger-toml.html#domain-verification) steps. Once you have completed these steps, your validator should be visible to the livenet [explorer](https://livenet.xrpl.org/network/validators) or any other site that monitors the validator network and supports decetralized domain verification.
 
-3. Submit a request to have your validator listed in XRP Charts' [Validator Registry](https://xrpcharts.ripple.com/#/validators) using this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLScszfq7rRLAfArSZtvitCyl-VFA9cNcdnXLFjURsdCQ3gHW7w/viewform). Having your validator listed in this registry provides another form of public verification that your validator and domain are owned by you. To complete the form, you'll need the following information:
-
-      1. Find your validator public key by running the following on the validator server.
-
-            $ /opt/ripple/bin/rippled server_info | grep pubkey_validator
-
-        Provide the value returned in the **Validator Public Key** field of the Google Form.
-
-      2. Sign the validator public key using your web domain's TLS private key. The TLS private key file does not need to be stored on your validator's server.
-
-            $ openssl dgst -sha256 -hex -sign /PATH/TO/YOUR/TLS.key <(echo YOUR_VALIDATOR_PUBLIC_KEY_HERE)
-
-        Sample output:
-
-            4a8b84ac264d18d116856efd2761a76f3f4544a1fbd82b9835bcd0aa67db91c53342a1ab197ab1ec4ae763d8476dd92fb9c24e6d9de37e3594c0af05d0f14fd2a00a7a5369723c019f122956bf3fc6c6b176ed0469c70c864aa07b4bf73042b1c7cf0b2c656aaf20ece5745f54ab0f78fab50ebd599e62401f4b57a4cccdf8b76d26f4490a1c51367e4a36faf860d48dd2f98a6134ebec1a6d92fadf9f89aae67e854f33e1acdcde12cfaf5f5dbf1b6a33833e768edbb9ff374cf4ae2be21dbc73186a5b54cc518f63d6081919e6125f7daf9a1d8e96e3fdbf3b94b089438221f8cfd78fd4fc85c646b288eb6d22771a3ee47fb597d28091e7aff38a1e636b4f
-
-        Provide the value returned in the **SSL Signature** field of the Google Form.
-
-      3. Using the [`validator-keys` tool](https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md) (included in `rippled` RPMs), sign the domain name.
-
-            $ validator-keys --keyfile /PATH/TO/YOUR/validator-keys.json sign YOUR_DOMAIN_NAME
-
-        Sample output:
-
-            E852C2FE725B64F353E19DB463C40B1ABB85959A63B8D09F72C6B6C27F80B6C72ED9D5ED6DC4B8690D1F195E28FF1B00FB7119C3F9831459F3C3DE263B73AC04
-
-        Provide the value returned in the **Domain Signature** field of the Google Form.
-
-4. After submitting the completed Google Form, you'll receive an email from XRP Charts that tells you whether your domain verification succeeded or failed. If your domain verification succeeds, XRP Charts lists your validator and domain in its [Validator Registry](https://xrpcharts.ripple.com/#/validators).
-
-<!--{ ***TODO: For the future - add a new section or separate document: "Operating a Trusted Validator" -- things that you need to be aware of once your validator has been added to a UNL and is participating in consensus. We should tell the user what to expect once they are listed in a UNL. How to tell if your validator is participating in the consensus process? How to tell if something isn't right with your validator - warning signs that they should look out for? How to tell if your validator has fallen out of agreement - what is the acceptable vs unacceptable threshold? Maybe provide a script that will alert them when something is going wrong.*** }-->
-
+3. Share your validator's public key with the public, especially other `rippled` operators. For example, you can share your validator's public key on your website, on social media, in the [XRPChat community forum](https://www.xrpchat.com/), or in a press release.
 
 
 ## Revoke validator keys

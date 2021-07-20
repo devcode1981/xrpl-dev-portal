@@ -1,3 +1,10 @@
+---
+html: peers.html
+parent: peer-management-methods.html
+blurb: Get information about the peer servers connected.
+labels:
+  - Core Server
+---
 # peers
 [[Source]](https://github.com/ripple/rippled/blob/52f298f150fc1530d201d3140c80d3eaf781cb5f/src/ripple/rpc/handlers/Peers.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 2,
     "command": "peers"
@@ -37,7 +44,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "peers_example",
   "result": {
@@ -174,7 +181,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "cluster" : {},
@@ -266,9 +273,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "cluster" : {},
@@ -407,7 +415,8 @@ The `metrics` object contains the following fields:
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

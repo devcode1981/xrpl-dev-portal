@@ -1,5 +1,12 @@
+---
+html: ledger_request.html
+parent: logging-and-data-management-methods.html
+blurb: サーバーに対し接続しているピアから特定のレジャーバージョンを取得するように指示します。
+labels:
+  - データ保持
+---
 # ledger_request
-[[ソース]<br>](https://github.com/ripple/rippled/blob/e980e69eca9ea843d200773eb1f43abe3848f1a0/src/ripple/rpc/handlers/LedgerRequest.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/e980e69eca9ea843d200773eb1f43abe3848f1a0/src/ripple/rpc/handlers/LedgerRequest.cpp "Source")
 
 `ledger_request`コマンドは、サーバーに対し接続しているピアから特定のレジャーバージョンを取得するように指示します。これは、サーバーが直接接続しているピアの1つにそのレジャーが存在している場合にのみ機能します。場合によっては、レジャーを完全に取得するにはこのコマンドを繰り返し実行する必要があります。
 
@@ -12,7 +19,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": 102,
    "command": "ledger_request",
@@ -49,9 +56,10 @@ rippled ledger_request 13800000
 
 *コマンドライン（失敗）*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "acquiring" : {
@@ -74,9 +82,10 @@ Connecting to 127.0.0.1:5005
 
 *コマンドライン（進行中）*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "hash" : "EB68B5B4F6F06BF59B6D7532BCB98BB98E2F10C2435D895217AA0AA7E910FBD5",
@@ -120,9 +129,10 @@ Connecting to 127.0.0.1:5005
 
 *コマンドライン（成功）*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "ledger" : {

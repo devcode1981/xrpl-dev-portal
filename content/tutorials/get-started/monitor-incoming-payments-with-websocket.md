@@ -1,3 +1,12 @@
+---
+html: monitor-incoming-payments-with-websocket.html
+parent: get-started.html
+blurb: Use the WebSocket API to actively monitor for new XRP payments (and more).
+filters:
+  - interactive_steps
+labels:
+  - Payments
+---
 # Monitor Incoming Payments with WebSocket
 
 This tutorial shows how to monitor for incoming [payments](payment-types.html) using the [WebSocket `rippled` API](rippled-api.html). Since all XRP Ledger transactions are public, anyone can monitor incoming payments to any address.
@@ -12,9 +21,8 @@ WebSocket follows a model where the client and server establish one connection, 
 - You need a stable internet connection and access to a `rippled` server. The embedded examples connect to Ripple's pool of public servers. If you [run your own `rippled` server](install-rippled.html), you can also connect to that server locally.
 - To properly handle XRP values without rounding errors, you need access to a number type that can do math on 64-bit unsigned integers. The examples in this tutorial use [big.js](https://github.com/MikeMcl/big.js/). If you are working with [issued currencies](issued-currencies.html), you need even more precision. For more information, see [Currency Precision](currency-formats.html#xrp-precision).
 
-<!-- Helper for interactive tutorial breadcrumbs -->
+<!-- Big number support -->
 <script type="application/javascript" src="assets/vendor/big.min.js"></script>
-<script type="application/javascript" src="assets/js/interactive-tutorial.js"></script>
 <script type="application/javascript">
 // Helper stuff for this interactive tutorial specifically
 
@@ -24,7 +32,6 @@ function writeToConsole(console_selector, message) {
   $(console_selector).append(write_msg)
   // TODO: JSON pretty-printing, maybe w/ multiple input args?
 }
-
 </script>
 
 {% set n = cycler(* range(1,99)) %}
@@ -70,7 +77,6 @@ Example:
 <button id="connect-button" class="btn btn-primary">Connect</button>
 <strong>Connection status:</strong>
 <span id="connection-status">Not connected</span>
-<div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
 <h5>Console:</h5>
 <div class="ws-console" id="monitor-console-connect"><span class="placeholder">(Log is empty)</span></div>
 {{ end_step() }}
@@ -133,7 +139,7 @@ const handleResponse = function(data) {
   if (AWAITING.hasOwnProperty(data.id)) {
     AWAITING[data.id].resolve(data)
   } else {
-    console.error("Response to un-awaited request w/ ID " + data.id)
+    console.warn("Response to un-awaited request w/ ID " + data.id)
   }
 }
 
@@ -179,7 +185,7 @@ async function pingpong() {
   const response = await api_request({command: "ping"})
   console.log("Pong!", response)
 }
-pingpong()
+// Add pingpong() to the 'open' listener for socket
 ```
 
 {{ start_step("Dispatch Messages") }}
@@ -263,7 +269,7 @@ The following code sample subscribes to the Test Net Faucet's sending address. I
 async function do_subscribe() {
   const sub_response = await api_request({
     command:"subscribe",
-    accounts: ["rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"]
+    accounts: ["rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"]
   })
   if (sub_response.status === "success") {
     console.log("Successfully subscribed!")
@@ -271,7 +277,7 @@ async function do_subscribe() {
     console.error("Error subscribing: ", sub_response)
   }
 }
-do_subscribe()
+// Add do_subscribe() to the 'open' listener for socket
 
 const log_tx = function(tx) {
   console.log(tx.transaction.TransactionType + " transaction sent by " +
@@ -337,7 +343,7 @@ When you subscribe to an account, you get messages for _all transactions to or f
 
         **Warning:** If you use the `transaction.Amount` field instead, you may be vulnerable to the [partial payments exploit](partial-payments.html#partial-payments-exploit). Malicious users can use this exploit to trick you into allowing the malicious user to trade or withdraw more money than they paid you.
 
-    - **[CheckCash transactions][]** :not_enabled: allow an account to receive money authorized by a different account's [CheckCreate transaction][]. Look at the metadata of a **CheckCash transaction** to see how much currency the account received.
+    - **[CheckCash transactions][]** allow an account to receive money authorized by a different account's [CheckCreate transaction][]. Look at the metadata of a **CheckCash transaction** to see how much currency the account received.
 
     - **[EscrowFinish transactions][]** can deliver XRP by finishing an [Escrow](escrow.html) created by a previous [EscrowCreate transaction][]. Look at the metadata of the **EscrowFinish transaction** to see which account received XRP from the escrow and how much.
 
@@ -394,7 +400,7 @@ function CountXRPDifference(affected_nodes, address) {
         }
       }
     } else if ((affected_nodes[i].hasOwnProperty("CreatedNode"))) {
-      // created a ledger entry. maybe the account just got funded?
+      // created a ledger entry. maybe the account got funded?
       let ledger_entry = affected_nodes[i].CreatedNode
       if (ledger_entry.LedgerEntryType === "AccountRoot" &&
           ledger_entry.NewFields.Account === address) {

@@ -1,8 +1,16 @@
+---
+html: transaction-basics.html
+parent: payment-system-basics.html
+blurb: Transactions are the only way to change the XRP Ledger. Understand what forms they take and how to use them.
+labels:
+  - Payments
+  - Transaction Sending
+---
 # Transaction Basics
 
 A _Transaction_ is the only way to modify the XRP Ledger. Transactions are only final if signed, submitted, and accepted into a validated ledger version following the [consensus process](consensus.html). Some ledger rules also generate _[pseudo-transactions](pseudo-transaction-types.html)_, which aren't signed or submitted, but still must be accepted by consensus. Transactions that fail are also included in ledgers because they modify balances of XRP to pay for the anti-spam [transaction cost][].
 
-Transactions can do more than just send money. In addition to supporting various [Payment Types](payment-types.html), transactions in the XRP Ledger are also used to rotate [cryptographic keys](cryptographic-keys.html), manage other settings, and trade in the XRP Ledger's [decentralized exchange](decentralized-exchange.html). The [`rippled` API reference](rippled-api.html) has a complete [list of transaction types](transaction-types.html).
+Transactions can do more than send money. In addition to supporting various [Payment Types](payment-types.html), transactions in the XRP Ledger are also used to rotate [cryptographic keys](cryptographic-keys.html), manage other settings, and trade in the XRP Ledger's [decentralized exchange](decentralized-exchange.html). The [`rippled` API reference](rippled-api.html) has a complete [list of transaction types](transaction-types.html).
 
 
 ### Identifying Transactions
@@ -54,7 +62,7 @@ Sending a transaction to the XRP Ledger involves several steps:
 3. Submit a transaction to a `rippled` server. If the transaction is properly formed, the server provisionally applies the transaction to its current version of the ledger and relays the transaction to other members of the peer-to-peer network.
 4. The [consensus process](consensus.html) determines which provisional transactions get included in the next validated ledger.
 5. The `rippled` servers apply those transactions to the previous ledger in a canonical order and share their results.
-6. If enough [trusted validators](rippled-server-modes.html#reasons-to-run-a-validator) created the exact same ledger, that ledger is declared _validated_ and the [results of the transactions](transaction-results.html) in that ledger are immutable.
+6. If enough [trusted validators](rippled-server-modes.html#validators) created the exact same ledger, that ledger is declared _validated_ and the [results of the transactions](transaction-results.html) in that ledger are immutable.
 
 See [Send XRP](send-xrp.html) for an interactive tutorial in sending XRP payments.
 
@@ -63,7 +71,7 @@ See [Send XRP](send-xrp.html) for an interactive tutorial in sending XRP payment
 
 Here is an example of an unsigned [Payment transaction][] in JSON:
 
-```
+```json
 {
   "TransactionType" : "Payment",
   "Account" : "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
@@ -90,7 +98,7 @@ The XRP Ledger only relays and executes a transaction if the transaction object 
 
 Signing a transaction generates a binary blob that can be submitted to the network. This means using `rippled`'s [submit command](submit.html). Here is an example of the same transaction, as a signed blob, being submitted with the WebSocket API:
 
-```
+```json
 {
   "id": 2,
   "command": "submit",
@@ -100,13 +108,13 @@ Signing a transaction generates a binary blob that can be submitted to the netwo
 
 ## Example Executed Transaction with Metadata
 
-After a transaction has been submitted, you can check its status using the API, for example using the [tx command](tx.html). This shows the transaction instructions, its outcome, and the [metadata](transaction-metadata.html) of all changes that were made in the process of executing it.
+After a transaction has been submitted, you can check its status using the API, for example using the [tx command](tx.html). This shows the transaction instructions, its outcome, and the [metadata](transaction-metadata.html) of all changes that were made by executing it.
 
 **Caution:** The success of a transaction is not final unless the transaction appears in a **validated** ledger with the result code `tesSUCCESS`. See also: [Finality of Results](finality-of-results.html).
 
 Example response from the `tx` command:
 
-```
+```json
 {
   "id": 6,
   "status": "success",

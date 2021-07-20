@@ -1,3 +1,10 @@
+---
+html: clustering.html
+parent: the-rippled-server.html
+blurb: 暗号処理の負荷を分散させるためにクラスターでrippledサーバーを運用できます。
+labels:
+  - コアサーバー
+---
 # クラスター化
 
 1つのデータセンターで複数の`rippled`サーバーを運用している場合は、これらのサーバーをクラスターに編成して、効率性を最大化できます。`rippled`サーバーをクラスターで運用するメリットは以下のとおりです。

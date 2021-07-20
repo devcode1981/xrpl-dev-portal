@@ -1,3 +1,11 @@
+---
+html: path_find.html
+parent: path-and-order-book-methods.html
+blurb: Find a path for a payment between two accounts and receive updates.
+labels:
+  - Cross-Currency
+  - Tokens
+---
 # path_find
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/PathFind.cpp "Source")
 
@@ -14,7 +22,7 @@ Although the `rippled` server tries to find the cheapest path or combination of 
 ## path_find create
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/PathFind.cpp#L50-L56 "Source")
 
-The `create` subcommand of `path_find` creates an ongoing request to find possible paths along which a payment transaction could be made from one specified account such that another account receives a desired amount of some currency. The initial response contains a suggested path between the two addresses that would result in the desired amount being received. After that, the server sends additional messages, with `"type": "path_find"`, with updates to the potential paths. The frequency of updates is left to the discretion of the server, but it usually means once every few seconds when there is a new ledger version.
+The `create` sub-command of `path_find` creates an ongoing request to find possible paths along which a payment transaction could be made from one specified account such that another account receives a desired amount of some currency. The initial response contains a suggested path between the two addresses that would result in the desired amount being received. After that, the server sends additional messages, with `"type": "path_find"`, with updates to the potential paths. The frequency of updates is left to the discretion of the server, but it usually means once every few seconds when there is a new ledger version.
 
 A client can only have one pathfinding request open at a time. If another pathfinding request is already open on the same connection, the old request is automatically closed and replaced with the new request.
 
@@ -25,7 +33,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 8,
     "command": "path_find",
@@ -48,7 +56,7 @@ The request includes the following parameters:
 
 | `Field`               | Type             | Description                       |
 |:----------------------|:-----------------|:----------------------------------|
-| `subcommand`          | String           | Use `"create"` to send the create subcommand |
+| `subcommand`          | String           | Use `"create"` to send the create sub-command |
 | `source_account`      | String           | Unique address of the account to find a path from. (In other words, the account that would be sending a payment.) |
 | `destination_account` | String           | Unique address of the account to find a path to. (In other words, the account that would receive a payment.) |
 | `destination_amount`  | String or Object | [Currency Amount][] that the destination account would receive in a transaction. **Special case:** [New in: rippled 0.30.0][] You can specify `"-1"` (for XRP) or provide -1 as the contents of the `value` field (for non-XRP currencies). This requests a path to deliver as much as possible, while spending no more than the amount specified in `send_max` (if provided). |
@@ -65,7 +73,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 1,
   "status": "success",
@@ -463,13 +471,13 @@ In addition to the initial response, the server sends more messages in a similar
 
 If the follow-up includes `"full_reply": true`, then this is the best path that rippled can find as of the current ledger.
 
-Here is an example of an asychronous follow-up from a path_find create request:
+Here is an example of an asynchronous follow-up from a path_find create request:
 
 <!-- MULTICODE_BLOCK_START -->
 
 *WebSocket*
 
-```
+```json
 {
     "id": 1,
     "type": "path_find",
@@ -491,7 +499,7 @@ Here is an example of an asychronous follow-up from a path_find create request:
 ## path_find close
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/PathFind.cpp#L58-L67 "Source")
 
-The `close` subcommand of `path_find` instructs the server to stop sending information about the current open pathfinding request.
+The `close` sub-command of `path_find` instructs the server to stop sending information about the current open pathfinding request.
 
 ### Request Format
 An example of the request format:
@@ -500,7 +508,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 57,
   "command": "path_find",
@@ -514,7 +522,7 @@ The request includes the following parameters:
 
 | `Field`      | Type   | Description                                |
 |:-------------|:-------|:-------------------------------------------|
-| `subcommand` | String | Use `"close"` to send the close subcommand |
+| `subcommand` | String | Use `"close"` to send the close sub-command |
 
 ### Response Format
 
@@ -536,7 +544,7 @@ If there was no outstanding pathfinding request, an error is returned instead.
 ## path_find status
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/PathFind.cpp#L69-L77 "Source")
 
-The `status` subcommand of `path_find` requests an immediate update about the client's currently-open pathfinding request.
+The `status` sub-command of `path_find` requests an immediate update about the client's currently-open pathfinding request.
 
 ### Request Format
 An example of the request format:
@@ -545,7 +553,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 58,
   "command": "path_find",
@@ -559,7 +567,7 @@ The request includes the following parameters:
 
 | `Field`      | Type   | Description                                  |
 |:-------------|:-------|:---------------------------------------------|
-| `subcommand` | String | Use `"status"` to send the status subcommand |
+| `subcommand` | String | Use `"status"` to send the status sub-command |
 
 ### Response Format
 

@@ -1,5 +1,12 @@
+---
+html: peers.html
+parent: peer-management-methods.html
+blurb: ピアプロトコルでこのサーバーに現在接続されているその他のすべてのrippledサーバーのリストを返します。
+labels:
+  - コアサーバー
+---
 # peers
-[[ソース]<br>](https://github.com/ripple/rippled/blob/52f298f150fc1530d201d3140c80d3eaf781cb5f/src/ripple/rpc/handlers/Peers.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/52f298f150fc1530d201d3140c80d3eaf781cb5f/src/ripple/rpc/handlers/Peers.cpp "Source")
 
 `peers`コマンドは、[ピアプロトコル](peer-protocol.html)でこのサーバーに現在接続されているその他のすべての`rippled`サーバーのリスト（各サーバーの接続状況と同期状況を含む）を返します。
 
@@ -12,7 +19,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": 2,
    "command": "peers"
@@ -37,7 +44,7 @@ rippled peers
 
 *WebSocket*
 
-```
+```json
 {
  "id": 2,
  "status": "success",
@@ -152,7 +159,7 @@ rippled peers
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "cluster" : {},
@@ -265,9 +272,10 @@ rippled peers
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "cluster" : {},

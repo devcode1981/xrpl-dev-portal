@@ -1,3 +1,10 @@
+---
+html: get_counts.html
+parent: status-and-debugging-methods.html
+blurb: Get statistics about the server's internals and memory usage.
+labels:
+  - Core Server
+---
 # get_counts
 [[Source]](https://github.com/ripple/rippled/blob/c7118a183a660648aa88a3546a6b2c5bce858440/src/ripple/rpc/handlers/GetCounts.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 90,
     "command": "get_counts",
@@ -22,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "get_counts",
     "params": [
@@ -35,7 +42,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: get_counts [min_count]
 rippled get_counts 100
 ```
@@ -56,7 +63,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "AL_hit_rate" : 48.36725616455078,
@@ -93,9 +100,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "AL_hit_rate" : 48.36725616455078,

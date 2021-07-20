@@ -1,3 +1,10 @@
+---
+html: ledger_closed.html
+parent: ledger-methods.html
+blurb: Get the latest closed ledger version.
+labels:
+  - Blockchain
+---
 # ledger_closed
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerClosed.cpp "Source")
 
@@ -10,7 +17,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
    "id": 2,
    "command": "ledger_closed"
@@ -19,7 +26,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "ledger_closed",
     "params": [
@@ -30,7 +37,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: ledger_closed
 rippled ledger_closed
 ```
@@ -48,7 +55,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 1,
   "status": "success",
@@ -62,14 +69,27 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "ledger_hash": "8B5A0C5F6B198254A6E411AF55C29EE40AA86251D2E78DD0BB17647047FA9C24",
         "ledger_index": 8696231,
         "status": "success"
     }
+}
+```
+
+*Commandline*
+
+```json
+{
+   "result" : {
+      "ledger_hash" : "6F5D3B97F1CAA8440AFCED3CA10FB9DC6472F64DEBC2EFAE7CAE7FC0123F32DA",
+      "ledger_index" : 56843991,
+      "status" : "success"
+   }
 }
 ```
 

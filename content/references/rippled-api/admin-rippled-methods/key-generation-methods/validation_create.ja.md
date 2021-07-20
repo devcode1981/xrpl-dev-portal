@@ -1,5 +1,13 @@
+---
+html: validation_create.html
+parent: key-generation-methods.html
+blurb: rippledサーバーがネットワークに対して自身の身元を識別させるのに使用できる暗号鍵を生成します。
+labels:
+  - セキュリティ
+  - コアサーバー
+---
 # validation_create
-[[ソース]<br>](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/ValidationCreate.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/ValidationCreate.cpp "Source")
 
 `validation_create`コマンドキーを使用して、[`rippled`サーバーがネットワークに対して自身の身元を識別させるのに使用できる暗号鍵](peer-protocol.html#ノードキーペア)を生成します。[wallet_proposeメソッド][]と同様に、このメソッドでは適切なフォーマットで一連のキーが単に生成されるだけです。XRP Ledgerのデータやサーバー構成は変更されません。
 
@@ -17,7 +25,7 @@ _`validation_create`メソッドは、権限のないユーザーは実行でき
 
 *WebSocket*
 
-```
+```json
 {
    "id": 0,
    "command": "validation_create",
@@ -27,7 +35,7 @@ _`validation_create`メソッドは、権限のないユーザーは実行でき
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "validation_create",
    "params": [
@@ -40,7 +48,7 @@ _`validation_create`メソッドは、権限のないユーザーは実行でき
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: validation_create [secret]
 rippled validation_create "BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE"
 ```
@@ -63,7 +71,7 @@ rippled validation_create "BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIR
 
 *JSON-RPC*
 
-```
+```json
 {
   "result" : {
      "status" : "success",
@@ -76,9 +84,10 @@ rippled validation_create "BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIR
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
   "result" : {
      "status" : "success",

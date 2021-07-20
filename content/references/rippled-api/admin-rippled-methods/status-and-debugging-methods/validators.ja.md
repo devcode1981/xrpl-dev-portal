@@ -1,5 +1,13 @@
+---
+html: validators.html
+parent: status-and-debugging-methods.html
+blurb: サーバーが使用する公開済みの信頼できるバリデータの最新リストに関する情報を返します。
+labels:
+  - ブロックチェーン
+  - コアサーバー
+---
 # validators
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Validators.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/Validators.cpp "Source")
 
 `validators`コマンドは、サーバーが使用する公開済みの信頼できるバリデータの最新リストに関する情報を、人間が読み取れる形式で返します。[新規: rippled 0.80.1][]
 
@@ -12,7 +20,7 @@
 
 *WebSocket*
 
-```
+```json
 {
    "id": 1,
    "command": "validators"
@@ -21,7 +29,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method": "validators",
    "params": [
@@ -32,7 +40,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: validators
 rippled validators
 ```
@@ -49,7 +57,7 @@ rippled validators
 
 *WebSocket*
 
-```
+```json
 {
    "id":5,
    "status":"success",
@@ -83,8 +91,9 @@ rippled validators
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "local_static_keys": [],
@@ -116,9 +125,10 @@ rippled validators
 
 *コマンドライン*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result":{
        "local_static_keys": [],

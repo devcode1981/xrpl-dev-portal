@@ -1,3 +1,11 @@
+---
+html: configure-a-private-server.html
+parent: configure-peering.html
+blurb: Set up a server to connect only to specific, trusted peers.
+labels:
+  - Core Server
+  - Security
+---
 # Configure a Private Server
 
 A [private server](peer-protocol.html#private-peers) is a `rippled` server that connects to the network only through specific, trusted peers instead of connecting directly to discovered peers in the open peer-to-peer network. This kind of configuration is an optional precaution most commonly recommended for [validators](run-rippled-as-a-validator.html), but it can be useful for other specific purposes.
@@ -40,9 +48,11 @@ To set up a specific server as a private peer, complete the following steps:
 
     If your server connects using **proxies**, the IP addresses and ports should match the configurations of the `rippled` servers you are using as proxies. For each of those servers, the port number should match the `protocol = peer` port in that server's config file (usually 51235). For example, your configuration might look like this:
 
-          [ips_fixed]
-          192.168.0.1 51235
-          192.168.0.2 51235
+        [ips_fixed]
+        192.168.0.1 51235
+        192.168.0.2 51235
+
+    **Note:** If you omit the port number, the server uses port 2459, the IANA-assigned port for the [XRP Ledger protocol](peer-protocol.html). [New in: rippled 1.6.0][]
 
 4. If using proxies, cluster them with your private peer and each other.
 

@@ -1,3 +1,10 @@
+---
+html: print.html
+parent: status-and-debugging-methods.html
+blurb: Get information about internal subsystems.
+labels:
+  - Core Server
+---
 # print
 [[Source]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/Print.cpp "Source")
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "print_req_1",
     "command": "print"
@@ -37,9 +44,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "app" : {

@@ -1,3 +1,9 @@
+---
+html: list-your-exchange-on-xrp-charts.html
+parent: xrp-ledger-businesses.html
+blurb: Have your exchange and its XRP trade and order book data listed on XRP Charts.
+status: removed
+---
 # List Your Exchange on XRP Charts
 
 In addition to providing data about the XRP Ledger network and its accounts and transactions, XRP Charts also provides [XRP market data](https://xrpcharts.ripple.com/#/xrp-markets) from external exchanges. This tutorial describes how to have your exchange and its XRP trade and order book data listed on XRP Charts.
@@ -10,14 +16,14 @@ To enable XRP Charts to list your exchange, you'll need to make the following da
 
 Then, you'll need to [send an exchange listing request to XRP Charts](#send-an-exchange-listing-request-to-xrp-charts).
 
-If you have any questions about endpoint specifications, contact <xrpcharts_support@ripple.com>.
+If you have any questions about endpoint specifications, contact <xrpcharts_support@ripple.com>. <!-- SPELLING_IGNORE: xrpcharts_support -->
 
 
 ## Provide a Recently Executed Trades Endpoint
 
 Provide a RESTful API endpoint that returns the most recent 500-1,000 individual trades executed in a particular XRP market.
 
-To ensure that it doesn't miss a trade, XRP Charts queries the endpoint frequently, between every 5 and 30 seconds, aiming to get responses that have overlapping trade data. Ensure that any rate limit enforced by your endpoint can accommodate this query frequency. XRP Charts records unique trade data only, even if it gets overlapping trades.
+To ensure that it doesn't miss a trade, XRP Charts queries the endpoint between every 5 and 30 seconds, aiming to get responses that have overlapping trade data. Ensure that any rate limit enforced by your endpoint can accommodate this query frequency. XRP Charts records unique trade data only, even if it gets overlapping trades.
 
 If XRP Charts needs to query your endpoint at a frequency that exceeds your rate limit, XRP Charts may request that you adjust the rate limit or provide the `last_tid` parameter.
 
@@ -127,7 +133,7 @@ Provide the following parameter. The parameter field name is an example. You can
 
 ### Response Format
 
-A successful response must be a JSON object that includes a timestamp and arrays of current bids and asks. The response does not need to provide the entire order book, but rather just enough data to provide a good idea of the current XRP liquidity available in the market. The parameter field names are examples. You can use other names.
+A successful response must be a JSON object that includes a timestamp and arrays of current bids and asks. The response does not need to provide the entire order book, but provides enough data to provide a good idea of the current XRP liquidity available in the market. The parameter field names are examples. You can use other names.
 
 | Field       | Type             | Description                                 |
 |:------------|:-----------------|:--------------------------------------------|

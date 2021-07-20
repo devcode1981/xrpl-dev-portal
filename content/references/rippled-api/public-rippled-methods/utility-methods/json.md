@@ -1,3 +1,10 @@
+---
+html: json.html
+parent: utility-methods.html
+blurb: Pass JSON through the commandline.
+labels:
+  - Core Server
+---
 # json
 
 The `json` method is a proxy to running other commands, and accepts the parameters for the command as a JSON value. It is *exclusive to the Commandline client*, and intended for cases where the commandline syntax for specifying parameters is inadequate or undesirable.
@@ -9,7 +16,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 # Syntax: json method json_stanza
 rippled -q json ledger_closed '{}'
 ```
@@ -24,7 +31,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
    "result" : {
       "ledger_hash" : "8047C3ECF1FA66326C1E57694F6814A1C32867C04D3D68A851367EE2F89BBEF3",

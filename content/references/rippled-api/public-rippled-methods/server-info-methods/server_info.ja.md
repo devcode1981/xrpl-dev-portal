@@ -1,5 +1,12 @@
+---
+html: server_info.html
+parent: server-info-methods.html
+blurb: rippledサーバーについての各種情報を、人間が読めるフォーマットでサーバーに要求します。
+labels:
+  - コアサーバー
+---
 # server_info
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/ServerInfo.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/ServerInfo.cpp "Source")
 
 `server_info`コマンドは、問い合わせ中の`rippled`サーバーについての各種情報を、人間が読めるフォーマットでサーバーに要求します。
 
@@ -10,7 +17,7 @@
 
 *WebSocket*
 
-```
+```json
 {
   "id": 1,
   "command": "server_info"
@@ -19,7 +26,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "server_info",
     "params": [
@@ -30,7 +37,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: server_info
 rippled server_info
 ```
@@ -49,7 +56,7 @@ rippled server_info
 
 *WebSocket*
 
-```
+```json
 {
   "id": 1,
   "status": "success",
@@ -156,8 +163,9 @@ rippled server_info
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result" : {
       "info" : {

@@ -1,5 +1,12 @@
+---
+html: ledger_current.html
+parent: ledger-methods.html
+blurb: 現在進行中のレジャーの一意のIDを返します。
+label:
+  - ブロックチェーン
+---
 # ledger_current
-[[ソース]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerCurrent.cpp "Source")
+[[ソース]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerCurrent.cpp "Source")
 
 `ledger_current`メソッドは、現在進行中のレジャーの一意のIDを返します。このコマンドで返されるレジャーは確定されたものではないため、このコマンドは主にテストに有用です。
 
@@ -11,7 +18,7 @@
 
 *WebSocket*
 
-```
+```json
 {
   "id":2,
   "command":"ledger_current"
@@ -20,7 +27,7 @@
 
 *JSON-RPC*
 
-```
+```json
 {
    "method":"ledger_current",
    "params":[
@@ -31,7 +38,7 @@
 
 *コマンドライン*
 
-```
+```sh
 #Syntax: ledger_current
 rippled ledger_current
 ```
@@ -50,7 +57,7 @@ rippled ledger_current
 
 *WebSocket*
 
-```
+```json
 {
  "id":2,
  "status":"success",
@@ -63,8 +70,9 @@ rippled ledger_current
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result":{
        "ledger_current_index":8696233,
